@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /clientes/blogadvogado/admin/
+
+Sitemap: https://brenochaves.dev/clientes/blogadvogado/sitemap.xml

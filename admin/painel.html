@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta charset="utf-8">
+    <link rel="icon" href="/clientes/blogadvogado/favicon.ico" type="image/png">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Painel de Artigos - Andres Oliveira Advocacia</title>
+<style>
+        .clip-angular {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
+        }
+    </style>
+<script type="module" src="/src/main.ts"></script>
+</head>
+<body class="admin-panel-page bg-background text-on-surface font-body font-body text-body flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-deep-sea-black text-on-secondary flex flex-col hidden md:flex shrink-0">
+<div class="h-20 flex items-center px-gutter border-b border-white/5">
+<span class="font-h3 font-h3 text-h3 text-on-secondary">Painel</span>
+</div>
+<nav class="flex-1 py-lg flex flex-col gap-sm px-sm">
+<a data-panel-target="overview" aria-current="false" class="flex items-center gap-sm px-sm py-xs rounded text-moon-breeze hover:text-on-secondary hover:bg-white/5 transition-colors font-label font-label text-label" href="#overview">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+                Visão Geral
+            </a>
+<a data-panel-target="articles" aria-current="page" class="flex items-center gap-sm px-sm py-xs rounded bg-white/10 text-on-secondary font-label font-label text-label relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-primary-fixed" href="#articles">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">article</span>
+                Artigos
+            </a>
+<a data-panel-target="categories" aria-current="false" class="flex items-center gap-sm px-sm py-xs rounded text-moon-breeze hover:text-on-secondary hover:bg-white/5 transition-colors font-label font-label text-label" href="#categories">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">category</span>
+                Categorias
+            </a>
+<a data-panel-target="authors" aria-current="false" class="flex items-center gap-sm px-sm py-xs rounded text-moon-breeze hover:text-on-secondary hover:bg-white/5 transition-colors font-label font-label text-label" href="#authors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">group</span>
+                Advogados
+            </a>
+<a data-panel-target="contacts" aria-current="false" class="flex items-center gap-sm px-sm py-xs rounded text-moon-breeze hover:text-on-secondary hover:bg-white/5 transition-colors font-label font-label text-label" href="#contacts">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">mail</span>
+                Contatos
+            </a>
+<a data-panel-target="settings" aria-current="false" class="flex items-center gap-sm px-sm py-xs rounded text-moon-breeze hover:text-on-secondary hover:bg-white/5 transition-colors font-label font-label text-label" href="#settings">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+                Configurações
+            </a>
+</nav>
+<div class="p-gutter border-t border-white/5">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-tint flex items-center justify-center text-on-secondary font-h3 font-h3 text-h3">
+                    A
+                </div>
+<div>
+<p class="font-label font-label text-label text-on-secondary">Admin</p>
+<p class="font-caption font-caption text-caption text-moon-breeze">admin@ao.adv.br</p>
+</div>
+</div>
+<button id="admin-logout" type="button" class="mt-sm w-full text-left font-label text-label text-moon-breeze hover:text-on-secondary">Sair com segurança</button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden">
+<!-- Top Header (Mobile specific or additional actions) -->
+<header class="h-20 bg-surface flex items-center justify-between px-gutter border-b border-outline-variant/20 shrink-0">
+<div class="flex items-center gap-sm md:hidden">
+<button class="text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-h3 font-h3 text-h3 text-primary">Painel</span>
+</div>
+<div class="hidden md:block">
+<h1 id="panel-title" class="font-h2 font-h2 text-h2 text-primary">Artigos</h1>
+</div>
+<a href="/clientes/blogadvogado/admin/editor/" class="bg-primary text-on-primary h-[48px] px-gutter flex items-center gap-sm clip-angular hover:opacity-90 transition-opacity">
+<span class="font-label font-label text-label uppercase tracking-widest">Novo artigo</span>
+<span class="material-symbols-outlined">arrow_forward_ios</span>
+</a>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto p-gutter md:p-lg">
+<section id="overview-panel" class="max-w-container-max mx-auto space-y-xl" hidden>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="bg-surface-container-lowest p-gutter border border-outline-variant/20"><p class="font-label text-label text-on-surface-variant mb-sm">Artigos publicados</p><p id="overview-published" class="font-display text-display text-primary">0</p></div>
+<div class="bg-surface-container-lowest p-gutter border border-outline-variant/20"><p class="font-label text-label text-on-surface-variant mb-sm">Rascunhos em aberto</p><p id="overview-drafts" class="font-display text-display text-primary">0</p></div>
+<div class="bg-surface-container-lowest p-gutter border border-outline-variant/20"><p class="font-label text-label text-on-surface-variant mb-sm">Categorias ativas</p><p id="overview-categories" class="font-display text-display text-primary">0</p></div>
+</div>
+<section class="bg-surface-container-lowest border border-outline-variant/20 p-gutter">
+<div class="flex items-center justify-between gap-sm mb-md"><h2 class="font-h3 text-h3 text-primary">Artigos recentes</h2><button type="button" data-open-panel="articles" class="font-label text-label text-primary underline underline-offset-4">Ver artigos</button></div>
+<div id="overview-recent" class="space-y-sm"></div>
+</section>
+</section>
+<section id="categories-panel" class="max-w-container-max mx-auto space-y-xl" hidden>
+<div><p class="font-label text-label uppercase tracking-widest text-on-surface-variant mb-xs">Organização</p><h2 class="font-h2 text-h2 text-primary">Categorias</h2></div>
+<form id="category-form" class="bg-surface-container-lowest border border-outline-variant/20 p-gutter flex flex-col md:flex-row gap-sm" novalidate>
+<label class="sr-only" for="category-name">Nome da categoria</label><input id="category-name" class="flex-1 h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" placeholder="Ex.: Direito Previdenciário" maxlength="60"><button type="submit" class="h-12 px-gutter bg-primary text-on-primary font-label">Adicionar categoria</button>
+</form>
+<p id="category-feedback" class="font-caption" aria-live="polite"></p>
+<div id="category-list" class="grid grid-cols-1 md:grid-cols-2 gap-sm"></div>
+</section>
+<section id="authors-panel" class="max-w-container-max mx-auto space-y-xl" hidden>
+<div><p class="font-label text-label uppercase tracking-widest text-on-surface-variant mb-xs">Equipe editorial</p><h2 class="font-h2 text-h2 text-primary">Advogados</h2><p class="mt-xs text-on-surface-variant">Cadastre os autores disponíveis no editor de artigos.</p></div>
+<div class="grid grid-cols-1 xl:grid-cols-[minmax(0,420px)_1fr] gap-lg items-start">
+<form id="author-form" class="bg-surface-container-lowest border border-outline-variant/20 p-gutter space-y-md" novalidate>
+<input id="author-id" type="hidden">
+<div><label class="block font-label text-label text-primary mb-xs" for="author-name">Nome completo</label><input id="author-name" required class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="100" placeholder="Ex.: Dra. Maria Silva"></div>
+<div><label class="block font-label text-label text-primary mb-xs" for="author-role">Cargo</label><input id="author-role" required class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="100" value="Advogado(a)" placeholder="Ex.: Advogada Associada"></div>
+<div><label class="block font-label text-label text-primary mb-xs" for="author-avatar-input">Foto do advogado</label><input id="author-avatar-input" type="file" accept="image/jpeg,image/png,image/webp" class="sr-only"><label id="author-avatar-dropzone" for="author-avatar-input" class="relative flex min-h-40 w-full cursor-pointer flex-col items-center justify-center gap-xs overflow-hidden border border-dashed border-outline-variant bg-surface-container-low p-sm text-center transition-colors hover:bg-surface-variant"><img id="author-avatar-preview" class="hidden h-24 w-24 rounded-full object-cover shadow-sm" alt="Prévia da foto"><span id="author-avatar-placeholder" class="material-symbols-outlined text-[32px] text-primary">account_circle</span><span id="author-avatar-instruction" class="font-caption text-caption text-on-surface-variant">Arraste uma foto ou clique para enviar</span></label></div>
+<div class="flex flex-wrap items-center gap-sm"><button type="submit" class="h-12 px-gutter bg-primary text-on-primary font-label">Salvar advogado</button><button id="author-cancel" type="button" class="hidden h-12 px-gutter border border-outline-variant text-primary font-label">Cancelar</button><p id="author-feedback" class="font-caption" aria-live="polite"></p></div>
+</form>
+<div id="author-list" class="grid grid-cols-1 md:grid-cols-2 gap-sm"></div>
+</div>
+</section>
+<section id="settings-panel" class="max-w-container-max mx-auto space-y-xl" hidden>
+<div><p class="font-label text-label uppercase tracking-widest text-on-surface-variant mb-xs">Dados do escritório</p><h2 class="font-h2 text-h2 text-primary">Configurações</h2></div>
+<form id="settings-form" class="bg-surface-container-lowest border border-outline-variant/20 p-gutter space-y-md" novalidate>
+<div><label class="block font-label text-label text-primary mb-xs" for="setting-site-name">Nome do escritório</label><input id="setting-site-name" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="80"></div>
+<div><label class="block font-label text-label text-primary mb-xs" for="setting-email">E-mail administrativo</label><input id="setting-email" type="email" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="120"></div>
+<div><label class="block font-label text-label text-primary mb-xs" for="setting-oab">Registro OAB</label><input id="setting-oab" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="60"></div>
+<div><label class="block font-label text-label text-primary mb-xs" for="setting-address">Endereço completo</label><textarea id="setting-address" class="w-full min-h-28 border border-outline-variant/50 bg-transparent px-sm py-xs outline-none focus:border-primary" maxlength="300" placeholder="Uma linha por informação"></textarea></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md"><div><label class="block font-label text-label text-primary mb-xs" for="setting-phone">Telefone / WhatsApp</label><input id="setting-phone" type="tel" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="40"></div><div><label class="block font-label text-label text-primary mb-xs" for="setting-office-hours">Horário de atendimento</label><input id="setting-office-hours" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="100"></div></div>
+<div class="flex items-center gap-sm"><button type="submit" class="h-12 px-gutter bg-primary text-on-primary font-label">Salvar configurações</button><p id="settings-feedback" class="font-caption" aria-live="polite"></p></div>
+</form>
+</section>
+<section id="contacts-panel" class="max-w-container-max mx-auto space-y-xl" hidden>
+<div class="flex flex-col md:flex-row md:items-end md:justify-between gap-sm"><div><p class="font-label text-label uppercase tracking-widest text-on-surface-variant mb-xs">Formulário do site</p><h2 class="font-h2 text-h2 text-primary">Contatos</h2></div><p id="contacts-summary" class="font-caption text-on-surface-variant"></p></div>
+<div id="contacts-list" class="space-y-sm"></div>
+</section>
+<div id="articles-panel" class="max-w-container-max mx-auto space-y-xl">
+<!-- Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Total -->
+<div class="bg-surface-container-lowest p-gutter border border-outline-variant/20 flex flex-col gap-sm">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label font-label text-label">Total de Artigos</span>
+<span class="material-symbols-outlined">library_books</span>
+</div>
+<span id="total-count" class="font-display font-display text-display text-primary">0</span>
+</div>
+<!-- Published -->
+<div class="bg-surface-container-lowest p-gutter border border-outline-variant/20 flex flex-col gap-sm">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label font-label text-label">Publicados</span>
+<span class="material-symbols-outlined text-primary-container">check_circle</span>
+</div>
+<span id="published-count" class="font-display font-display text-display text-primary">0</span>
+</div>
+<!-- Drafts -->
+<div class="bg-surface-container-lowest p-gutter border border-outline-variant/20 flex flex-col gap-sm clip-angular relative overflow-hidden">
+<div class="absolute inset-0 bg-surface-container -z-10"></div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label font-label text-label">Rascunhos</span>
+<span class="material-symbols-outlined text-on-surface-variant">draft</span>
+</div>
+<span id="draft-count" class="font-display font-display text-display text-on-surface">0</span>
+</div>
+</div>
+<!-- List Section -->
+<section class="space-y-md">
+<!-- Controls -->
+<div class="flex flex-col md:flex-row justify-between gap-sm">
+<div class="relative flex-1 max-w-md">
+<label class="sr-only" for="search">Buscar artigos</label>
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full h-12 pl-[48px] pr-sm bg-surface-container-lowest border border-outline-variant/50 focus:border-tertiary-container focus:ring-1 focus:ring-tertiary-container transition-colors font-body font-body text-body text-on-surface outline-none" id="search" placeholder="Buscar por título..." type="search" autocomplete="off">
+</div>
+<div class="flex gap-sm">
+<div class="relative">
+<select id="status-filter" class="h-12 pl-sm pr-10 bg-surface-container-lowest border border-outline-variant/50 focus:border-tertiary-container focus:ring-1 focus:ring-tertiary-container appearance-none font-body font-body text-body text-on-surface outline-none cursor-pointer">
+<option value="">Status: Todos</option>
+<option value="published">Publicado</option>
+<option value="draft">Rascunho</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+<button id="apply-filters" type="button" title="Aplicar busca e filtro" aria-label="Aplicar busca e filtro" class="h-12 px-sm border border-outline-variant/50 text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Table -->
+<div class="bg-surface-container-lowest border border-outline-variant/20 overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/20 bg-surface text-on-surface-variant font-label font-label text-label">
+<th class="py-sm px-gutter font-normal">Título</th>
+<th class="py-sm px-gutter font-normal hidden md:table-cell">Categoria</th>
+<th class="py-sm px-gutter font-normal">Status</th>
+<th class="py-sm px-gutter font-normal hidden sm:table-cell">Data</th>
+<th class="py-sm px-gutter font-normal text-right">Ações</th>
+</tr>
+</thead>
+<tbody id="articles-table-body" class="font-body font-body text-body divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container/50 transition-colors group">
+<td class="py-md px-gutter">
+<p class="font-label font-label text-label text-primary group-hover:text-tertiary-container transition-colors truncate max-w-[200px] sm:max-w-xs md:max-w-md">Implicações Jurídicas da LGPD para Startups</p>
+</td>
+<td class="py-md px-gutter hidden md:table-cell text-on-surface-variant">Direito Digital</td>
+<td class="py-md px-gutter">
+<span class="inline-flex items-center px-2 py-1 rounded bg-secondary-container/50 text-on-secondary-container font-caption font-caption text-caption">Publicado</span>
+</td>
+<td class="py-md px-gutter hidden sm:table-cell text-on-surface-variant text-sm">24 Out 2023</td>
+<td class="py-md px-gutter text-right">
+<button class="text-outline hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-outline hover:text-error transition-colors p-1">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors group">
+<td class="py-md px-gutter">
+<p class="font-label font-label text-label text-primary group-hover:text-tertiary-container transition-colors truncate max-w-[200px] sm:max-w-xs md:max-w-md">Guia Prático sobre Contratos de Prestação de Serviços</p>
+</td>
+<td class="py-md px-gutter hidden md:table-cell text-on-surface-variant">Direito Civil</td>
+<td class="py-md px-gutter">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-high text-on-surface-variant font-caption font-caption text-caption">Rascunho</span>
+</td>
+<td class="py-md px-gutter hidden sm:table-cell text-on-surface-variant text-sm">-</td>
+<td class="py-md px-gutter text-right">
+<button class="text-outline hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-outline hover:text-error transition-colors p-1">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors group">
+<td class="py-md px-gutter">
+<p class="font-label font-label text-label text-primary group-hover:text-tertiary-container transition-colors truncate max-w-[200px] sm:max-w-xs md:max-w-md">A Nova Lei de Licitações: O que Muda para as Empresas</p>
+</td>
+<td class="py-md px-gutter hidden md:table-cell text-on-surface-variant">Direito Público</td>
+<td class="py-md px-gutter">
+<span class="inline-flex items-center px-2 py-1 rounded bg-secondary-container/50 text-on-secondary-container font-caption font-caption text-caption">Publicado</span>
+</td>
+<td class="py-md px-gutter hidden sm:table-cell text-on-surface-variant text-sm">15 Set 2023</td>
+<td class="py-md px-gutter text-right">
+<button class="text-outline hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-outline hover:text-error transition-colors p-1">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination (Simple) -->
+<div class="flex justify-between items-center py-sm text-on-surface-variant font-caption font-caption text-caption">
+<span id="articles-summary">Mostrando 0 artigos</span>
+<div id="admin-pagination" class="flex gap-xs">
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 hover:bg-surface-container disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 bg-surface-container text-on-surface">1</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 hover:bg-surface-container">2</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 hover:bg-surface-container">3</button>
+<span class="w-8 h-8 flex items-center justify-center">...</span>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 hover:bg-surface-container">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</body></html>

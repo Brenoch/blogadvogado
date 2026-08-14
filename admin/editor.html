@@ -1,0 +1,194 @@
+<!DOCTYPE html><html lang="pt-BR" style=""><head>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta charset="utf-8">
+    <link rel="icon" href="/clientes/blogadvogado/favicon.ico" type="image/png">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Editor de Artigo - Andres Oliveira Advocacia</title>
+<!-- Google Fonts -->
+<!-- Material Symbols -->
+<!-- Tailwind CSS -->
+<!-- Tailwind Config -->
+<style>
+        /* Custom scrollbar for editor area */
+        .editor-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .editor-scroll::-webkit-scrollbar-track {
+            background: theme('colors.surface-container-low');
+        }
+        .editor-scroll::-webkit-scrollbar-thumb {
+            background-color: theme('colors.outline-variant');
+            border-radius: theme('borderRadius.full');
+        }
+        #article-content h2 { margin: 1.75rem 0 .75rem; color: #000f18; font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; line-height: 1.2; }
+        #article-content p { margin: 0 0 1rem; }
+        #article-content ul { margin: 0 0 1.25rem; padding-left: 1.5rem; list-style: disc; }
+        #article-content li { margin-bottom: .4rem; }
+        #article-content blockquote { margin: 1.5rem 0; padding: 1rem 1.25rem; border-left: 3px solid #101e27; background: #f3f3f5; color: #082344; font-style: italic; line-height: 1.65; }
+        #article-content .article-notice { margin: 1.5rem 0; padding: 1rem 1.25rem; border: 1px solid #c2c7cc; background: #e7e8ea; }
+    </style>
+<script type="module" src="/src/main.ts"></script>
+</head>
+<body class="admin-editor-page bg-background text-on-surface font-body antialiased selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar (JSON Injected) -->
+<header class="bg-surface/90 backdrop-blur-md fixed top-0 w-full z-50 border-b border-outline-variant/20 shadow-sm transition-all duration-300">
+<div class="flex justify-between items-center h-20 px-gutter max-w-container-max mx-auto">
+<a href="/clientes/blogadvogado/admin/" class="flex items-center gap-xs font-label text-label text-primary hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span> Voltar ao Painel
+</a>
+<button id="admin-logout" type="button" class="font-label text-label text-primary hover:text-primary-container">Sair</button>
+</div>
+</header>
+<!-- Main Workspace Container -->
+<main class="pt-[120px] pb-xl px-gutter max-w-container-max mx-auto w-full min-h-screen flex flex-col md:flex-row gap-gutter">
+<!-- Canvas/Editor Area (Left) -->
+<div class="flex-1 flex flex-col gap-lg">
+<!-- Context Header -->
+<div>
+<h1 class="font-h2 text-h2 text-primary mb-xs">Redigir Artigo</h1>
+<p class="font-body text-body text-on-surface-variant">Crie e edite conteúdos jurídicos para publicação no blog.</p>
+</div>
+<!-- Form Fields -->
+<div class="flex flex-col gap-md">
+<!-- Título -->
+<div>
+<label class="block font-label text-label text-primary mb-xs" for="title">Título do Artigo</label>
+<input class="w-full h-[48px] bg-surface-container-lowest border border-outline rounded text-primary font-body text-body px-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all placeholder:text-outline-variant" id="title" placeholder="Ex: Impactos da Nova Legislação Trabalhista" type="text">
+</div>
+<!-- Slug -->
+<div>
+<label class="block font-label text-label text-primary mb-xs" for="slug">URL Amigável (Slug)</label>
+<div class="flex">
+<span class="flex items-center px-sm border border-r-0 border-outline bg-surface-container-low text-on-surface-variant rounded-l font-body text-body">andresoliveira.com.br/blog/</span>
+<input class="flex-1 h-[48px] bg-surface-container-lowest border border-outline rounded-r text-primary font-body text-body px-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all placeholder:text-outline-variant" id="slug" placeholder="impactos-nova-legislacao" type="text">
+</div>
+</div>
+<!-- Resumo -->
+<div>
+<label class="block font-label text-label text-primary mb-xs" for="summary">Resumo Executivo</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline rounded text-primary font-body text-body p-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all resize-none placeholder:text-outline-variant" id="summary" placeholder="Breve introdução sobre o tema abordado no artigo (máx. 160 caracteres)." rows="3"></textarea>
+<p class="mt-xs font-caption text-caption text-on-surface-variant">Até 160 caracteres.</p>
+</div>
+<!-- Rich Text Editor Container -->
+<div class="flex flex-col border border-outline rounded overflow-hidden bg-surface-container-lowest">
+<!-- Toolbar -->
+<div id="editor-toolbar" class="flex flex-wrap gap-xs p-xs border-b border-outline-variant bg-surface-container-low items-center" role="toolbar" aria-label="Formatação do artigo">
+<button data-command="bold" aria-label="Negrito" aria-pressed="false" class="p-xs text-on-surface hover:bg-surface-variant rounded transition-colors" title="Negrito" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">format_bold</span>
+</button>
+<button data-command="italic" aria-label="Itálico" aria-pressed="false" class="p-xs text-on-surface hover:bg-surface-variant rounded transition-colors" title="Itálico" type="button">
+<span class="material-symbols-outlined text-[20px]">format_italic</span>
+</button>
+<button data-command="underline" aria-label="Sublinhado" aria-pressed="false" class="p-xs text-on-surface hover:bg-surface-variant rounded transition-colors" title="Sublinhado" type="button">
+<span class="material-symbols-outlined text-[20px]">format_underlined</span>
+</button>
+<div class="w-px h-6 bg-outline-variant mx-xs"></div>
+<button data-command="formatBlock" data-value="h2" aria-label="Título 2" aria-pressed="false" class="p-xs text-on-surface hover:bg-surface-variant rounded transition-colors" title="Título 2" type="button">
+<span class="material-symbols-outlined text-[20px]">format_h2</span>
+</button>
+<button data-command="insertUnorderedList" aria-label="Lista" aria-pressed="false" class="p-xs text-on-surface hover:bg-surface-variant rounded transition-colors" title="Lista" type="button">
+<span class="material-symbols-outlined text-[20px]">format_list_bulleted</span>
+</button>
+<button data-command="formatBlock" data-value="blockquote" aria-label="Citação" aria-pressed="false" class="p-xs text-on-surface hover:bg-surface-variant rounded transition-colors" title="Citação" type="button">
+<span class="material-symbols-outlined text-[20px]">format_quote</span>
+</button>
+<div class="w-px h-6 bg-outline-variant mx-xs"></div>
+<button data-command="autoFormat" aria-label="Formatar texto automaticamente" class="p-xs text-on-surface hover:bg-surface-variant rounded transition-colors" title="Formatar texto automaticamente" type="button">
+<span class="material-symbols-outlined text-[20px]">auto_fix_high</span>
+</button>
+<button data-command="createLink" aria-label="Inserir link" class="p-xs text-on-surface hover:bg-surface-variant rounded transition-colors" title="Inserir Link" type="button">
+<span class="material-symbols-outlined text-[20px]">link</span>
+</button>
+</div>
+<p id="editor-feedback" class="sr-only" aria-live="polite"></p>
+<!-- Editor Area -->
+<div id="article-content" contenteditable="true" class="p-sm min-h-[400px] font-body text-body text-primary outline-none editor-scroll" data-placeholder="Comece a redigir o conteúdo aqui...">
+<p class="text-outline-variant">Comece a redigir o conteúdo aqui...</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar (Right) -->
+<aside class="w-full md:w-[320px] lg:w-[380px] shrink-0 flex flex-col gap-md">
+<!-- Actions Panel -->
+<div class="bg-surface-container-lowest border border-outline/20 rounded p-sm flex flex-col gap-sm shadow-[0_4px_24px_-8px_rgba(16,30,39,0.08)]">
+<div class="flex items-center justify-between mb-xs">
+<span class="font-label text-label text-on-surface-variant">Status Atual</span>
+<span class="font-caption text-caption px-xs py-1 rounded bg-secondary-container text-on-secondary-container">Rascunho</span>
+</div>
+<div class="flex flex-col gap-xs">
+<button id="save-draft" type="button" class="w-full h-[48px] border border-primary bg-transparent text-primary font-label text-label rounded flex items-center justify-center gap-xs hover:bg-surface-container-low transition-colors duration-300">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                        Salvar Rascunho
+                    </button>
+<button id="preview-article" type="button" class="w-full h-[48px] border border-primary bg-transparent text-primary font-label text-label rounded flex items-center justify-center gap-xs hover:bg-surface-container-low transition-colors duration-300">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                        Visualizar
+                    </button>
+<button id="publish-article" type="button" class="w-full h-[48px] bg-primary text-on-primary font-label text-label rounded flex items-center justify-center gap-xs hover:bg-primary-container transition-colors duration-300 mt-xs">
+                        Publicar
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward_ios</span>
+</button>
+</div>
+</div>
+<!-- Meta Data Panel -->
+<div class="bg-surface-container-lowest border border-outline/20 rounded p-sm flex flex-col gap-md shadow-[0_4px_24px_-8px_rgba(16,30,39,0.08)]">
+<!-- Autor -->
+<div>
+<label class="block font-label text-label text-primary mb-xs" for="article-author">Autor do artigo</label>
+<select id="article-author" class="w-full h-[48px] appearance-none bg-transparent border border-outline rounded text-primary font-body text-body px-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all cursor-pointer">
+<option value="" disabled selected hidden>Selecione um advogado...</option>
+</select>
+<div id="article-author-preview" class="mt-sm flex items-center gap-xs" hidden>
+<img id="article-author-avatar" class="w-9 h-9 rounded-full object-cover bg-surface-container" alt="">
+</div>
+</div>
+<div class="w-full h-px bg-outline-variant/30"></div>
+<!-- Categoria -->
+<div>
+<label class="block font-label text-label text-primary mb-xs">Categoria Principal</label>
+<div class="relative">
+<select id="article-category" class="w-full h-[48px] appearance-none bg-transparent border border-outline rounded text-primary font-body text-body px-sm pr-[40px] focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all cursor-pointer">
+<option value="" disabled selected hidden>Selecione uma área...</option>
+<option value="direito-previdenciario">Direito Previdenciário</option>
+<option value="direito-civil">Direito Civil</option>
+<option value="direito-penal">Direito Penal</option>
+<option value="direito-bancario">Direito Bancário</option>
+<option value="direito-do-consumidor">Direito do Consumidor</option>
+<option value="direito-trabalhista">Direito Trabalhista</option>
+<option value="direito-administrativo">Direito Administrativo</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="w-full h-px bg-outline-variant/30"></div>
+<!-- Imagem Destacada -->
+<div>
+<label class="block font-label text-label text-primary mb-xs">Imagem Destacada</label>
+<input id="featured-image-input" type="file" accept="image/jpeg,image/png,image/webp" class="sr-only">
+<label id="featured-image-dropzone" for="featured-image-input" class="w-full aspect-[16/10] bg-surface-container-low border border-dashed border-outline-variant rounded flex flex-col items-center justify-center gap-xs cursor-pointer hover:bg-surface-variant focus-within:ring-2 focus-within:ring-primary transition-colors relative overflow-hidden group" tabindex="0" aria-label="Arraste uma imagem ou clique para enviar" aria-dropeffect="copy">
+<img id="featured-image-preview" class="absolute inset-0 w-full h-full object-cover hidden" alt="Prévia da imagem destacada">
+<div id="featured-image-placeholder" class="flex flex-col items-center gap-xs">
+<span class="material-symbols-outlined text-[32px] text-primary" style="font-variation-settings: 'FILL' 0;">image</span>
+<span id="featured-image-instruction" class="font-body text-caption text-on-surface-variant text-center px-sm">Arraste uma imagem ou clique para fazer upload</span>
+</div>
+<span id="featured-image-name" class="absolute bottom-xs left-xs right-xs bg-primary/85 text-on-primary text-caption px-xs py-1 hidden truncate"></span>
+</label>
+<button id="remove-featured-image" type="button" class="mt-xs text-caption text-primary underline underline-offset-4 hidden">Remover imagem</button>
+<p id="featured-image-feedback" class="mt-xs font-caption text-error" aria-live="polite"></p>
+<p class="mt-xs font-caption text-on-surface-variant">JPG, PNG ou WebP. Até 20 MB na origem. Compressão automática para WebP de até 1 MB.</p>
+</div>
+<div class="w-full h-px bg-outline-variant/30"></div>
+<!-- Video URL -->
+<div>
+<label class="block font-label text-label text-primary mb-xs" for="video-url">URL de Vídeo (Opcional)</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">smart_display</span>
+<input class="w-full h-[48px] bg-transparent border border-outline rounded text-primary font-body text-body pl-[40px] pr-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all placeholder:text-outline-variant" id="video-url" placeholder="https://youtube.com/..." type="url">
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer (JSON Injected) -->
+</body></html>

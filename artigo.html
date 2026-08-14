@@ -1,0 +1,228 @@
+<!DOCTYPE html><html lang="pt-BR" style=""><head>
+<meta charset="utf-8">
+    <link rel="icon" href="/clientes/blogadvogado/favicon.ico" type="image/png">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Artigo - Andres Oliveira Advocacia</title>
+<!-- Fonts -->
+<!-- Material Symbols -->
+<!-- Tailwind CSS -->
+<!-- Tailwind Config -->
+<style>
+        body { background-color: #f8f9fb; color: #191c1e; }
+        .angular-cut { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 48px), calc(100% - 48px) 100%, 0 100%); }
+        .angular-cut-sm { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%); }
+        
+        /* Smooth scrolling for TOC */
+        html { scroll-behavior: smooth; }
+        
+        /* Article specific styling */
+        .article-content p { margin-bottom: 1.5rem; }
+        .article-content h2 { margin-top: 3rem; margin-bottom: 1rem; color: #000f18; font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; line-height: 32px; }
+        .article-content ul { list-style-type: none; padding-left: 0; margin-bottom: 1.5rem; }
+        .article-content ul li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; }
+        .article-content ul li::before { content: ''; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; background-color: #062635; border-radius: 50%; }
+        .article-content blockquote { margin: 2.5rem 0; padding: 1.5rem 1.75rem; border-left: 3px solid #101e27; background: #f3f3f5; color: #082344; font-style: italic; line-height: 1.75; }
+        .article-content .article-notice { margin: 2.5rem 0; padding: 1.25rem 1.5rem; border: 1px solid #c2c7cc; background: #e7e8ea; color: #42474b; }
+        .article-content .article-notice strong { display: block; margin-bottom: .5rem; color: #000f18; font-family: Archivo, sans-serif; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+        .article-content .article-notice p { margin: 0; font-size: 14px; line-height: 1.6; }
+    </style>
+<script type="module" src="/src/main.ts"></script>
+</head>
+<body class="antialiased min-h-screen flex flex-col font-body">
+<!-- TopNavBar -->
+<header class="bg-surface/90 backdrop-blur-md fixed top-0 w-full z-50 border-b border-outline-variant/20 shadow-sm transition-all duration-300">
+<div class="flex justify-between items-center h-20 px-gutter max-w-container-max mx-auto">
+<!-- Brand Logo -->
+<a class="font-h3 text-h3 text-primary tracking-tight flex-shrink-0" href="/clientes/blogadvogado/"><img alt="Andre Oliveira Advocacia" class="h-12 w-auto object-contain" src="/clientes/blogadvogado/images/1fb1e1048c240597.png"></a>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex flex-none items-center gap-xl">
+<a class="font-body text-label font-semibold uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="/clientes/blogadvogado/">Início</a>
+<a class="font-body text-label font-semibold uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="/clientes/blogadvogado/areas-de-atuacao/">Áreas de Atuação</a>
+<a class="font-body text-label font-semibold uppercase tracking-widest text-primary border-b border-primary pb-1" href="/clientes/blogadvogado/blog/">Blog</a>
+<a class="font-body text-label font-semibold uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="/clientes/blogadvogado/contato/">Contato</a>
+</nav>
+<!-- Trailing Action -->
+<div class="hidden md:flex flex-shrink-0"><a class="inline-flex items-center justify-center bg-primary text-on-primary h-[44px] px-md rounded-none hover:bg-deep-sea-black transition-colors duration-300 font-body text-label font-semibold uppercase tracking-widest gap-3 group" href="/clientes/blogadvogado/contato/">Agendar Consulta</a></div>
+<!-- Mobile Menu Toggle -->
+<button type="button" aria-label="Abrir menu" class="md:hidden text-primary focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+<span class="material-symbols-outlined text-[28px]">menu</span>
+</button>
+</div>
+<!-- Mobile Menu Overlay -->
+<div class="hidden fixed inset-0 z-[60] bg-surface p-gutter flex flex-col" id="mobile-menu">
+<div class="flex justify-between items-center mb-xl">
+<span class="font-h3 text-h3 text-primary tracking-tight">Menu</span>
+<button type="button" aria-label="Fechar menu" class="text-primary p-xs" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<ul class="flex flex-col gap-lg">
+<li><a class="text-h3 font-h3 text-primary" href="/clientes/blogadvogado/">Início</a></li>
+<li><a class="text-h3 font-h3 text-primary" href="/clientes/blogadvogado/areas-de-atuacao/">Áreas de Atuação</a></li>
+<li><a class="text-h3 font-h3 text-primary border-b-2 border-primary w-fit" href="/clientes/blogadvogado/blog/">Blog</a></li>
+<li><a class="text-h3 font-h3 text-primary" href="/clientes/blogadvogado/contato/">Contato</a></li>
+</ul>
+<div class="mt-auto">
+<a class="flex items-center justify-center h-14 w-full bg-primary text-on-secondary font-label rounded-DEFAULT" href="/clientes/blogadvogado/contato/">
+Agendar Consulta
+</a>
+</div>
+</div>
+</header>
+<!-- Main Content Wrapper -->
+<main class="flex-grow pt-[120px] pb-xxl px-gutter max-w-container-max mx-auto w-full">
+<!-- Hero Section -->
+<header class="max-w-[800px] mb-xl">
+<div class="flex items-center gap-sm mb-sm">
+<span class="text-primary font-caption uppercase tracking-widest text-caption">Direito Societário</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-on-surface-variant font-caption text-caption">Leitura de 8 min</span>
+</div>
+<h1 class="font-h1-mobile text-h1-mobile md:font-h1 md:text-h1 text-primary mb-lg">
+                Reestruturação Societária: Estratégias para Proteção Patrimonial e Sucessão
+            </h1>
+<!-- Metadata Row -->
+<div class="flex items-center border-t border-b border-outline-variant/20 py-sm mb-xl">
+<div class="w-12 h-12 rounded-full overflow-hidden mr-sm bg-surface-container">
+<!-- Placeholder for Author Avatar -->
+<img id="article-author-avatar" class="w-full h-full object-cover" data-alt="Retrato profissional do autor do artigo" src="/clientes/blogadvogado/images/187376365d715245.png">
+</div>
+<div>
+<p id="article-author-name" class="font-label text-label text-primary m-0">Dr. Andres Oliveira</p>
+<p id="article-meta" class="font-caption text-caption text-on-surface-variant m-0">Sócio Fundador • Publicado em 24 de Outubro, 2024</p>
+</div>
+<div class="ml-auto hidden sm:flex gap-sm">
+<button id="share-article" type="button" aria-label="Compartilhar artigo" class="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant/30 text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+<button id="bookmark-article" type="button" aria-label="Salvar artigo" class="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant/30 text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Featured Image with Angular Cut -->
+<div id="article-featured-media" class="w-full aspect-[21/9] bg-surface-container mb-xxl relative angular-cut overflow-hidden" hidden>
+<img id="article-featured-image" class="w-full h-full object-cover" alt="Imagem destacada do artigo" width="1600" height="1000" loading="eager" decoding="async" fetchpriority="high">
+<!-- Decorative overlay to enhance 'cool tone' requirement slightly -->
+<div class="absolute inset-0 bg-primary-container/10 mix-blend-multiply"></div>
+</div>
+<!-- Article Body & Sidebar Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter relative">
+<!-- Lateral TOC (Sidebar) -->
+<aside class="hidden lg:block lg:col-span-2">
+<div class="sticky top-[120px]">
+<h4 class="font-label text-label text-on-surface-variant uppercase tracking-widest mb-md">Sumário</h4>
+<nav id="article-toc" class="flex flex-col gap-sm border-l border-outline-variant/30" aria-label="Sumário do artigo"></nav>
+</div>
+</aside>
+<!-- Main Content Area -->
+<article class="lg:col-span-7 lg:col-start-3 article-content font-body text-body-lg text-on-surface">
+<section id="introducao">
+<p class="font-body-lg text-body-lg lead font-medium text-primary">
+                        A volatilidade do mercado e as complexidades regulatórias exigem que grupos familiares e empresariais adotem posturas proativas em relação à sua estrutura societária. A reorganização não é apenas um mecanismo de eficiência tributária, mas o alicerce para a perenidade do negócio.
+                    </p>
+<p class="">
+                        No contexto atual, onde o cruzamento de dados fiscais atinge níveis inéditos de precisão, manter estruturas obsoletas representa um risco silencioso e cumulativo. O objetivo central de uma reestruturação bem desenhada é isolar riscos operacionais, proteger o patrimônio acumulado e estabelecer regras claras de governança para as gerações futuras, minimizando conflitos que frequentemente desestabilizam operações rentáveis.
+                    </p>
+</section>
+<!-- Featured Blockquote -->
+<blockquote class="my-xl p-lg bg-surface-container-low border-l-4 border-primary rounded-r-lg">
+<p class="font-body-lg text-body-lg italic text-primary mb-sm">
+                        "A verdadeira proteção patrimonial não se baseia em ocultação, mas sim no rigor arquitetônico da estrutura jurídica, garantindo conformidade, liquidez e sucessão pacífica."
+                    </p>
+<footer class="font-label text-label text-on-surface-variant uppercase tracking-widest">
+                        — Dr. Andres Oliveira, OAB/SP 000.000
+                    </footer>
+</blockquote>
+<section id="estrategias">
+<h2 class="">Estratégias de Proteção e Isolamento de Risco</h2>
+<p class="">
+                        A segregação de ativos (imobiliários, operacionais e financeiros) em veículos específicos (como <em>Holdings</em> Patrimoniais e Operacionais) é o primeiro passo arquitetônico. Esta separação impede que contingências trabalhistas ou fiscais de uma frente de negócios contaminem reservas financeiras ou bens imóveis da família.
+                    </p>
+<ul>
+<li class=""><strong>Cisão Parcial:</strong> Transferência de parcelas do patrimônio para sociedades novas ou existentes.</li>
+<li class=""><strong>Incorporação de Ações:</strong> Consolidação de controle sob uma holding para facilitar a governança corporativa.</li>
+<li class=""><strong>Acordo de Acionistas:</strong> Instrumento vital para prever regras de saída (<em>drag-along</em>, <em>tag-along</em>) e critérios de avaliação de quotas.</li>
+</ul>
+</section>
+<!-- Informative Disclaimer Block -->
+<div class="my-xl p-md bg-surface-variant border border-outline/20 rounded-DEFAULT flex items-start gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant">info</span>
+<div>
+<h5 class="font-label text-label text-primary mb-xs">Aviso Jurídico Informativo</h5>
+<p class="font-caption text-caption text-on-surface-variant m-0">
+                            O conteúdo deste artigo possui caráter estritamente informativo e não substitui a consulta jurídica formal. Cada estrutura societária possui peculiaridades que exigem análise individualizada e aderência às normas da Receita Federal e Juntas Comerciais pertinentes.
+                        </p>
+</div>
+</div>
+<section id="planejamento">
+<h2 class="">O Eixo do Planejamento Sucessório</h2>
+<p class="">
+                        O processo sucessório via inventário tradicional é oneroso, público e frequentemente gera paralisação das atividades da empresa. A estruturação prévia permite a transferência de quotas aos herdeiros com reserva de usufruto político e econômico aos fundadores, garantindo que o controle permaneça com quem detém o conhecimento estratégico, enquanto a propriedade é transferida de forma otimizada.
+                    </p>
+</section>
+<section id="conclusao">
+<h2 class="">Conclusão</h2>
+<p class="">
+                        A arquitetura legal de um patrimônio exige precisão milimétrica. A inércia diante da evolução normativa é, em si, uma decisão de alto risco. Convidamos os líderes empresariais a reavaliarem seus alicerces societários sob a ótica da sustentabilidade a longo prazo.
+                    </p>
+</section>
+</article>
+<aside id="article-video-player" class="lg:col-span-3" hidden>
+<div class="lg:sticky lg:top-[120px] border border-outline-variant/30 bg-surface-container-low p-sm angular-cut">
+<p class="font-label text-label uppercase tracking-widest text-outline mb-sm">Vídeo relacionado</p>
+<div class="aspect-video bg-surface-container overflow-hidden"></div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Related Articles Section (Bento/Minimalist Grid) -->
+<section id="related-articles-section" class="border-t border-outline-variant/20 py-xxl bg-surface">
+<div class="px-gutter max-w-container-max mx-auto">
+<div class="flex justify-between items-end mb-xl">
+<h3 class="font-h3 text-h3 text-primary">Artigos Relacionados</h3>
+<a class="font-label text-label uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs" href="/clientes/blogadvogado/blog/">
+                    Ver Todos
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div id="related-articles-grid" class="grid grid-cols-1 md:grid-cols-3 gap-md"></div>
+</div>
+</section>
+<!-- Footer Component -->
+<footer class="bg-deep-sea-black dark:bg-black text-on-secondary dark:text-moon-breeze font-body text-body dark:text-surface-variant w-full py-xl border-t border-white/5">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-lg px-gutter max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-2">
+<div class="font-h3 text-h3 text-on-secondary mb-md">
+                    Andre Oliveira Advocacia
+                </div>
+<p class="text-moon-breeze text-caption max-w-md">
+                    Excelência, discrição e precisão arquitetônica na resolução de conflitos complexos e estruturação jurídica estratégica.
+                </p>
+</div>
+<div class="col-span-1">
+<h5 class="text-on-secondary font-label uppercase tracking-widest mb-sm">Links Úteis</h5>
+<ul class="flex flex-col gap-sm">
+<li class=""><a class="text-moon-breeze hover:text-on-secondary transition-colors focus:outline-none focus:ring-1 focus:ring-primary-fixed" href="/clientes/blogadvogado/politica-de-privacidade/">Privacidade</a></li>
+<li class=""><a class="text-moon-breeze hover:text-on-secondary transition-colors focus:outline-none focus:ring-1 focus:ring-primary-fixed" href="/clientes/blogadvogado/politica-de-cookies/">Cookies</a></li>
+<li class=""><a class="text-moon-breeze hover:text-on-secondary transition-colors focus:outline-none focus:ring-1 focus:ring-primary-fixed" href="/clientes/blogadvogado/termos-de-uso/">Termos de Uso</a></li>
+<li class=""><a class="text-moon-breeze hover:text-on-secondary transition-colors focus:outline-none focus:ring-1 focus:ring-primary-fixed" href="#" data-manage-cookies>Gerenciar cookies</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h5 class="text-on-secondary font-label uppercase tracking-widest mb-sm">Registro</h5>
+<p class="text-moon-breeze">
+                    OAB/SP 000.000
+                </p>
+</div>
+<div class="col-span-1 md:col-span-4 mt-lg pt-lg border-t border-white/10 text-caption text-moon-breeze text-center md:text-left">
+                © 2026 Andre Oliveira Advocacia. Todos os direitos reservados.
+            </div>
+</div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html><html class="light" lang="pt-BR"><head>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta charset="utf-8">
+    <link rel="icon" href="/clientes/blogadvogado/favicon.ico" type="image/png">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Login Administrativo - Andres Oliveira Advocacia</title>
+<!-- Material Symbols -->
+<!-- Google Fonts -->
+<script type="module" src="/src/main.ts"></script>
+</head>
+<body class="admin-login-page bg-surface text-on-surface antialiased min-h-screen flex flex-col items-center justify-center selection:bg-primary-fixed selection:text-on-primary-fixed">
+<main class="w-full max-w-[400px] px-gutter mx-auto flex flex-col items-center">
+<!-- Logo -->
+<div class="mb-xl flex flex-col items-center">
+
+</div>
+<!-- Login Form Container -->
+<div class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded p-lg shadow-[0_8px_32px_rgba(16,30,39,0.04)] relative overflow-hidden">
+<!-- Subtle Angular Architectural Element -->
+<div class="absolute top-0 right-0 w-16 h-16 bg-surface-container -mr-8 -mt-8 rotate-45 transform pointer-events-none"></div>
+<form id="admin-login-form" class="flex flex-col space-y-md relative z-10" novalidate>
+<!-- E-mail Field -->
+<div class="flex flex-col space-y-xs">
+<label class="font-label text-label text-on-surface" for="email">E-mail Corporativo</label>
+<input class="w-full min-h-[44px] bg-transparent border border-outline-variant rounded px-sm py-xs font-body text-body text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="email" name="email" placeholder="admin@escritorio.com.br" required type="email" autocomplete="username" autocapitalize="none" spellcheck="false">
+</div>
+<!-- Password Field -->
+<div class="flex flex-col space-y-xs">
+<div class="flex justify-between items-baseline">
+<label class="font-label text-label text-on-surface" for="password">Senha</label>
+<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:underline" href="mailto:brenochavesdsp@gmail.com?subject=Recupera%C3%A7%C3%A3o%20de%20acesso%20ao%20painel">Esqueci minha senha</a>
+</div>
+<input class="w-full min-h-[44px] bg-transparent border border-outline-variant rounded px-sm py-xs font-body text-body text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="password" name="password" required type="password" autocomplete="current-password" minlength="12">
+</div>
+<!-- Submit Button -->
+<button class="w-full h-[48px] mt-sm bg-primary text-on-primary rounded font-label text-label flex items-center justify-between px-md hover:bg-tertiary-container transition-colors focus:outline-none focus:ring-2 focus:ring-primary-fixed focus:ring-offset-2 focus:ring-offset-surface-container-lowest group" type="submit">
+<span class="">Entrar</span>
+<span class="material-symbols-outlined transform group-hover:translate-x-1 transition-transform" style="font-variation-settings: 'FILL' 0;">arrow_forward</span>
+</button>
+</form>
+<p id="login-feedback" class="font-caption text-caption text-error mt-sm" role="status"></p>
+<p class="font-caption text-caption text-on-surface-variant mt-xs">Acesso somente para usuário autorizado no Supabase.</p>
+</div>
+<!-- Discretionary Message -->
+<div class="mt-lg text-center opacity-70">
+<span class="material-symbols-outlined text-outline text-[16px] align-middle mr-xs">lock</span>
+<span class="font-caption text-caption text-outline uppercase tracking-widest">Acesso restrito a colaboradores autorizados</span>
+</div>
+</main>
+
+
+</body></html>

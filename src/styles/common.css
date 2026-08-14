@@ -1,0 +1,228 @@
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  src: url('../assets/material-symbols.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+}
+
+.map-open-link {
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined' !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'liga';
+}
+
+:focus-visible {
+  outline: 3px solid #00658a;
+  outline-offset: 3px;
+}
+
+.site-footer-standard {
+  display: block !important;
+  background: #101e27 !important;
+  color: #acbbc2 !important;
+  padding: 64px 24px 24px !important;
+  border: 0 !important;
+}
+
+.site-footer-standard * {
+  box-sizing: border-box;
+}
+
+.site-footer-wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.site-footer-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1.35fr 1.35fr 1fr;
+  gap: 48px;
+}
+
+.site-footer-name {
+  display: block;
+  color: #fff;
+  font: 700 28px/1.08 'Space Grotesk', Arial, sans-serif;
+  margin-bottom: 16px;
+}
+
+.site-footer-grid h2 {
+  margin: 0 0 16px;
+  color: #fff;
+  font: 700 12px/1.2 Archivo, Arial, sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.site-footer-grid p,
+.site-footer-grid a,
+.site-footer-grid span {
+  margin: 0;
+  color: #acbbc2 !important;
+  font: 400 16px/1.85 Archivo, Arial, sans-serif;
+  text-decoration: none;
+  white-space: pre-line;
+}
+
+.site-footer-grid nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.site-footer-bottom {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid rgb(255 255 255 / 10%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.site-footer-bottom .site-copyright,
+.site-developer {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  color: #acbbc2 !important;
+  font: 600 12px/16px Archivo, Arial, sans-serif;
+}
+
+.site-developer:hover {
+  color: #fff !important;
+}
+
+#lgpd-cookie-banner {
+  position: fixed;
+  z-index: 9999;
+  right: 24px;
+  bottom: 24px;
+  max-width: 620px;
+  padding: 22px 24px;
+  background: #101e27;
+  color: #fff;
+  border: 1px solid #607582;
+  box-shadow: 0 18px 48px rgb(0 15 24 / 30%);
+  font: 400 15px/1.55 Archivo, Arial, sans-serif;
+  display: flex;
+  gap: 22px;
+  align-items: flex-end;
+}
+
+#lgpd-cookie-banner strong {
+  font: 600 17px/1.2 'Space Grotesk', Arial, sans-serif;
+  display: block;
+  margin-bottom: 7px;
+}
+
+#lgpd-cookie-banner p {
+  margin: 0;
+  color: #d8e1e5;
+}
+
+#lgpd-cookie-banner a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lgpd-cookie-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.lgpd-cookie-actions button {
+  border: 1px solid #aecade;
+  background: transparent;
+  color: #fff;
+  padding: 10px 13px;
+  font: 600 13px Archivo, Arial, sans-serif;
+  cursor: pointer;
+}
+
+.lgpd-cookie-actions .lgpd-accept {
+  background: #c9e7fb;
+  color: #001e2c;
+  border-color: #c9e7fb;
+}
+
+@media (max-width: 767px) {
+  .site-footer-standard {
+    padding: 48px 20px 20px !important;
+  }
+
+  .site-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .site-footer-bottom {
+    margin-top: 40px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 680px) {
+  #lgpd-cookie-banner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 18px;
+    display: block;
+  }
+
+  .lgpd-cookie-actions {
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .lgpd-cookie-actions button {
+    flex: 1 1 170px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
