@@ -1,0 +1,25 @@
+# Andre Oliveira Advocacia
+
+> Site institucional e blog jurídico do escritório Andre Oliveira Advocacia. O conteúdo é informativo e não substitui consulta jurídica individual.
+
+## Áreas de atuação
+
+- [Direito Previdenciário](https://brenochaves.dev/clientes/blogadvogado/direito-previdenciario/): benefícios, aposentadorias e demandas perante o INSS.
+- [Direito Trabalhista](https://brenochaves.dev/clientes/blogadvogado/direito-trabalhista/): orientação preventiva, documentos e conflitos trabalhistas.
+- [Direito Civil](https://brenochaves.dev/clientes/blogadvogado/direito-civil/): contratos, obrigações e responsabilidade civil.
+- [Outras áreas](https://brenochaves.dev/clientes/blogadvogado/areas-de-atuacao/): Direito Penal, Bancário, do Consumidor e Administrativo.
+
+## Conteúdo e contato
+
+- [Blog jurídico](https://brenochaves.dev/clientes/blogadvogado/blog/)
+- [Contato e localização](https://brenochaves.dev/clientes/blogadvogado/contato/)
+- [Política de Privacidade](https://brenochaves.dev/clientes/blogadvogado/politica-de-privacidade/)
+- [Política de Cookies](https://brenochaves.dev/clientes/blogadvogado/politica-de-cookies/)
+- [Termos de Uso](https://brenochaves.dev/clientes/blogadvogado/termos-de-uso/)
+
+## Identificação
+
+- Nome: Andre Oliveira Advocacia
+- Idioma: português do Brasil
+- Público: pessoas que procuram informações jurídicas e atendimento profissional
+- Temas principais: advogado previdenciário, Direito Previdenciário, Direito Trabalhista, Direito Civil e Direito do Consumidor

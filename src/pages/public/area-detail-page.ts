@@ -1,6 +1,7 @@
 import { route } from '../../domain/defaults';
 import { escapeHtml } from '../../domain/text';
 import { contentService } from '../../application/content-service';
+import { SeoPresenter } from '../../presentation/seo-presenter';
 
 interface AreaContent {
   title: string;
@@ -59,7 +60,14 @@ export function mountAreaDetailPage(): void {
     return;
   }
 
-  document.title = `${area.title} | ${contentService.settings().siteName}`;
+  const settings = contentService.settings();
+  const title = `${area.title} | ${settings.siteName}`;
+  const canonical = `${location.origin}${route(`areas-de-atuacao/${encodeURIComponent(key)}/`)}`;
+  new SeoPresenter().apply({
+    title,
+    description: area.lead,
+    canonical
+  });
   setText('breadcrumb-area', area.title.replace('Direito ', ''));
   setText('area-title', area.title);
   setText('area-lead', area.lead);

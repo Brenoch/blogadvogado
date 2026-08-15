@@ -1,4 +1,4 @@
-import { sanitizeArticleHtml } from '../domain/text';
+import { sanitizeArticleHtml } from '../infrastructure/sanitization/article-html';
 
 export class RichTextEditor {
   public constructor(

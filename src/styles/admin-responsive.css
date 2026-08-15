@@ -8,6 +8,53 @@ body {
   display: none;
 }
 
+.admin-panel-page > main {
+  min-width: 0;
+}
+
+.admin-settings-group {
+  min-width: 0;
+  border: 1px solid rgba(194, 199, 204, .45);
+  padding: 24px;
+}
+
+.admin-settings-group legend {
+  padding: 0 8px;
+  color: #000f18;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.admin-settings-help {
+  margin: -2px 0 16px;
+  color: #42474b;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.admin-settings-grid,
+.admin-address-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.admin-grid-span-2 {
+  grid-column: 1 / -1;
+}
+
+.admin-settings-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-articles-table td {
+  min-width: 0;
+}
+
 @media (max-width: 767px) {
   .admin-panel-page > aside {
     display: flex !important;
@@ -43,14 +90,16 @@ body {
     gap: 12px;
   }
 
-  .admin-panel-page > main > header a[href$="/admin/editor/"] {
-    min-width: 48px;
+  .admin-panel-page > main > header [data-admin-new-article] {
+    min-width: auto;
     height: 48px;
-    padding: 0 14px !important;
+    padding: 0 16px !important;
+    margin-left: auto;
+    white-space: nowrap;
   }
 
-  .admin-panel-page > main > header a[href$="/admin/editor/"] .font-label {
-    display: none;
+  .admin-panel-page > main > header [data-admin-new-article] .font-label {
+    display: inline !important;
   }
 
   .admin-panel-page .text-display {
@@ -67,6 +116,113 @@ body {
 
   .admin-panel-page #contacts-list > div {
     overflow-wrap: anywhere;
+  }
+
+  .admin-panel-page #settings-form {
+    padding: 16px !important;
+  }
+
+  .admin-settings-group {
+    padding: 16px;
+  }
+
+  .admin-settings-grid,
+  .admin-address-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .admin-grid-span-2 {
+    grid-column: auto;
+  }
+
+  .admin-settings-actions {
+    align-items: stretch;
+  }
+
+  .admin-settings-actions button {
+    width: 100%;
+  }
+
+  .admin-settings-actions p {
+    min-height: 20px;
+  }
+
+  .admin-panel-page [data-article-controls] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .admin-panel-page [data-article-filter-controls] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 48px;
+    gap: 12px;
+  }
+
+  .admin-panel-page [data-article-filter-controls] > div,
+  .admin-panel-page [data-article-filter-controls] select {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .admin-panel-page .admin-articles-table {
+    overflow: visible;
+    border: 0;
+    background: transparent;
+  }
+
+  .admin-panel-page .admin-articles-table table,
+  .admin-panel-page .admin-articles-table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .admin-panel-page .admin-articles-table thead {
+    display: none;
+  }
+
+  .admin-panel-page .admin-articles-table tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px 16px;
+    margin-bottom: 12px;
+    padding: 16px;
+    border: 1px solid rgba(194, 199, 204, .45);
+    background: #fff;
+  }
+
+  .admin-panel-page .admin-articles-table td {
+    display: block !important;
+    padding: 0 !important;
+    text-align: left;
+  }
+
+  .admin-panel-page .admin-articles-table td[data-field="title"],
+  .admin-panel-page .admin-articles-table td[data-field="category"] {
+    grid-column: 1 / -1;
+  }
+
+  .admin-panel-page .admin-articles-table td[data-field]::before {
+    display: block;
+    margin-bottom: 4px;
+    color: #42474b;
+    content: attr(data-label);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+  }
+
+  .admin-panel-page .admin-articles-table td[data-field="actions"] {
+    justify-self: end;
+    text-align: right;
+  }
+
+  .admin-panel-page .admin-article-title {
+    max-width: none !important;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
   }
 
   .admin-editor-page main {

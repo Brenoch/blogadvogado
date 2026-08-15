@@ -25,6 +25,10 @@ body {
   white-space: nowrap;
 }
 
+[data-contact-address] {
+  white-space: pre-line;
+}
+
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined' !important;
   font-weight: normal;

@@ -9,15 +9,34 @@ interface SeoData {
 export class SeoPresenter {
   public apply(data: SeoData = {}): void {
     const canonical = data.canonical ?? `${location.origin}${location.pathname}`;
-    if (data.title) document.title = data.title;
-    if (data.description) this.meta('name', 'description', data.description);
+    const title = data.title ?? document.title;
+    const description = data.description
+      ?? document.head.querySelector<HTMLMetaElement>('meta[name="description"]')?.content
+      ?? '';
+    const image = data.image ? new URL(data.image, location.origin).href : '';
+    if (data.title) document.title = title;
+    if (description) this.meta('name', 'description', description);
     this.link('canonical', canonical);
     this.meta('property', 'og:url', canonical);
     this.meta('property', 'og:type', data.type ?? 'website');
-    if (data.title) this.meta('property', 'og:title', data.title);
-    if (data.description) this.meta('property', 'og:description', data.description);
-    if (data.image) this.meta('property', 'og:image', data.image);
-    this.meta('name', 'twitter:card', data.image ? 'summary_large_image' : 'summary');
+    this.meta('property', 'og:locale', 'pt_BR');
+    const siteName = document.head.querySelector<HTMLMetaElement>('meta[name="author"]')?.content
+      ?? document.title.split('|').at(-1)?.trim()
+      ?? 'Andre Oliveira Advocacia';
+    this.meta('property', 'og:site_name', siteName);
+    if (title) {
+      this.meta('property', 'og:title', title);
+      this.meta('name', 'twitter:title', title);
+    }
+    if (description) {
+      this.meta('property', 'og:description', description);
+      this.meta('name', 'twitter:description', description);
+    }
+    if (image) {
+      this.meta('property', 'og:image', image);
+      this.meta('name', 'twitter:image', image);
+    }
+    this.meta('name', 'twitter:card', image ? 'summary_large_image' : 'summary');
   }
 
   public structuredData(id: string, data: Record<string, unknown>): void {

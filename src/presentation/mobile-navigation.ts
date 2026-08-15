@@ -41,7 +41,7 @@ export class MobileNavigation {
     if (!title || !desktopBrand) return;
     const mobileBrand = desktopBrand.cloneNode(true) as HTMLAnchorElement;
     mobileBrand.className = 'mobile-menu-brand';
-    mobileBrand.setAttribute('aria-label', 'Andres Oliveira Advocacia — início');
+    mobileBrand.setAttribute('aria-label', 'Andre Oliveira Advocacia — início');
     title.replaceWith(mobileBrand);
   }
 }

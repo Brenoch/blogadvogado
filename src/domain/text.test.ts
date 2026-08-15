@@ -12,6 +12,8 @@ describe('text utilities', () => {
 
   it('accepts safe image URLs only', () => {
     expect(safeImageUrl('https://example.com/image.webp')).toBe('https://example.com/image.webp');
+    expect(safeImageUrl('/clientes/blogadvogado/images/187376365d715245.png'))
+      .toBe('/clientes/blogadvogado/images/187376365d715245.webp');
     expect(safeImageUrl('javascript:alert(1)')).toBe('');
   });
 

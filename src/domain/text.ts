@@ -1,5 +1,3 @@
-import DOMPurify from 'dompurify';
-
 export function slugify(value: string): string {
   return value
     .normalize('NFD')
@@ -20,17 +18,25 @@ export function escapeHtml(value: unknown): string {
   })[character] ?? character);
 }
 
-export function sanitizeArticleHtml(value: string): string {
-  return DOMPurify.sanitize(value, {
-    ALLOWED_TAGS: ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'h2', 'h3', 'ul', 'ol', 'li', 'blockquote', 'aside', 'a'],
-    ALLOWED_ATTR: ['href', 'class', 'target', 'rel'],
-    ALLOW_DATA_ATTR: false
-  });
-}
-
 export function safeImageUrl(value: unknown): string {
   const url = String(value ?? '').trim();
-  return /^(https?:\/\/|data:image\/(jpeg|png|webp);base64,)/i.test(url) ? url : '';
+  if (!/^(https?:\/\/|\/(?!\/)|data:image\/(jpeg|png|webp);base64,)/i.test(url)) return '';
+  return optimizeLegacyImageUrl(url);
+}
+
+const optimizedStaticImages = new Set([
+  '041cbf2d42c6d15f',
+  '187376365d715245',
+  '1fb1e1048c240597',
+  '89021c88bdf02655',
+  '9dfe3dde7dcebb7c',
+  'da0602dd94c3e7a7'
+]);
+
+function optimizeLegacyImageUrl(url: string): string {
+  return url.replace(/\/images\/([a-f0-9]+)\.(?:png|jpe?g)(?=\?|#|$)/i, (match, id: string) => (
+    optimizedStaticImages.has(id.toLowerCase()) ? `/images/${id}.webp` : match
+  ));
 }
 
 export function youtubeEmbedUrl(value: unknown): string {

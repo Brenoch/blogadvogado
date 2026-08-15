@@ -25,6 +25,19 @@ Copie `.env.example` para `.env.local` e informe a URL e a chave publicável do 
 - `src/infrastructure`: Supabase, armazenamento e imagens.
 - `src/presentation`: componentes compartilhados.
 - `src/pages`: controladores de cada página.
+- `src/styles`: estilos globais e responsivos.
+- `scripts`: automação de imagens, fontes, sitemap e verificação.
+- `public`: arquivos públicos, SEO técnico e mídia otimizada.
+
+Os arquivos HTML na raiz são entradas multipágina do Vite. A hospedagem converte essas entradas em URLs limpas por meio do `.htaccess`.
+
+## SEO e desempenho
+
+- Metadados, canonical, Open Graph e dados estruturados.
+- `robots.txt`, `sitemap.xml` e `llms.txt` gerados no build.
+- Imagens estáticas convertidas para WebP.
+- Fontes locais com preload e `font-display: swap`.
+- Integração Supabase carregada sem bloquear a primeira renderização.
 
 ## Publicação
 

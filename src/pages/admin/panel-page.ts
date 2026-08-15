@@ -16,6 +16,57 @@ const PANEL_TITLES: Record<PanelName, string> = {
   settings: 'Configurações'
 };
 
+type AddressFields = {
+  street: string;
+  number: string;
+  complement: string;
+  district: string;
+  city: string;
+  state: string;
+  postalCode: string;
+};
+
+const EMPTY_ADDRESS: AddressFields = {
+  street: '',
+  number: '',
+  complement: '',
+  district: '',
+  city: '',
+  state: '',
+  postalCode: ''
+};
+
+function addressFields(address: string): AddressFields {
+  const lines = address.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+  if (!lines.length) return { ...EMPTY_ADDRESS };
+
+  const firstLine = lines[0] ?? '';
+  const first = firstLine.match(/^(.*?)(?:,\s*(.+))?$/);
+  const zipIndex = lines.findIndex((line) => /^CEP\b/i.test(line));
+  const locationIndex = zipIndex > 1 ? zipIndex - 1 : (lines.length > 1 ? lines.length - 1 : -1);
+  const locationLine = locationIndex > 0 ? (lines[locationIndex] ?? '') : '';
+  const location = locationLine.match(/^(.*?)(?:,\s*(.*?))?(?:\s*-\s*([A-Za-z]{2}))?$/);
+
+  return {
+    street: first?.[1]?.trim() ?? firstLine,
+    number: first?.[2]?.trim() ?? '',
+    complement: locationIndex > 1 ? lines.slice(1, locationIndex).join(', ') : '',
+    district: location?.[1]?.trim() ?? '',
+    city: location?.[2]?.trim() ?? '',
+    state: location?.[3]?.trim().toUpperCase() ?? '',
+    postalCode: zipIndex >= 0 ? (lines[zipIndex] ?? '').replace(/^CEP\s*:?[\s-]*/i, '').trim() : ''
+  };
+}
+
+function formatAddress(fields: AddressFields): string {
+  const firstLine = [fields.street, fields.number].filter(Boolean).join(', ');
+  const cityState = [fields.city, fields.state].filter(Boolean).join(' - ');
+  const locationLine = [fields.district, cityState].filter(Boolean).join(', ');
+  return [firstLine, fields.complement, locationLine, fields.postalCode ? `CEP ${fields.postalCode}` : '']
+    .filter(Boolean)
+    .join('\n');
+}
+
 export class PanelPage {
   private currentPage = 1;
   private readonly pageSize = 10;
@@ -142,7 +193,7 @@ export class PanelPage {
         siteName: requiredById<HTMLInputElement>('setting-site-name').value.trim(),
         email: requiredById<HTMLInputElement>('setting-email').value.trim(),
         oab: requiredById<HTMLInputElement>('setting-oab').value.trim(),
-        address: requiredById<HTMLTextAreaElement>('setting-address').value.trim(),
+        address: formatAddress(this.readAddressFields()),
         phone: requiredById<HTMLInputElement>('setting-phone').value.trim(),
         officeHours: requiredById<HTMLInputElement>('setting-office-hours').value.trim()
       };
@@ -259,7 +310,7 @@ export class PanelPage {
   private articleRow(article: ReturnType<typeof contentService.articles>[number]): string {
     const published = article.status === 'published';
     const category = contentService.categories().find(({ slug }) => slug === article.category)?.name ?? 'Sem categoria';
-    return `<tr class="hover:bg-surface-container/50 transition-colors group"><td class="py-md px-gutter"><p class="font-label text-label text-primary truncate max-w-[200px] sm:max-w-xs md:max-w-md">${escapeHtml(article.title)}</p></td><td class="py-md px-gutter hidden md:table-cell text-on-surface-variant">${escapeHtml(category)}</td><td class="py-md px-gutter"><span class="inline-flex items-center px-2 py-1 rounded font-caption text-caption ${published ? 'bg-secondary-container/50 text-on-secondary-container' : 'bg-surface-container-high text-on-surface-variant'}">${published ? 'Publicado' : 'Rascunho'}</span></td><td class="py-md px-gutter hidden sm:table-cell text-on-surface-variant text-sm">${formatArticleDate(published ? article.publishedAt : article.updatedAt)}</td><td class="py-md px-gutter text-right"><a class="text-outline hover:text-primary transition-colors p-1 inline-block" title="Editar artigo" href="${route(`admin/editor/?id=${encodeURIComponent(article.id)}`)}"><span class="material-symbols-outlined text-[20px]">edit</span></a><button data-delete-article="${escapeHtml(article.id)}" class="text-outline hover:text-error transition-colors p-1" type="button" title="Excluir artigo"><span class="material-symbols-outlined text-[20px]">delete</span></button></td></tr>`;
+    return `<tr class="hover:bg-surface-container/50 transition-colors group"><td data-field="title" data-label="Título" class="py-md px-gutter"><p class="admin-article-title font-label text-label text-primary truncate max-w-[200px] sm:max-w-xs md:max-w-md">${escapeHtml(article.title)}</p></td><td data-field="category" data-label="Categoria" class="py-md px-gutter hidden md:table-cell text-on-surface-variant">${escapeHtml(category)}</td><td data-field="status" data-label="Status" class="py-md px-gutter"><span class="inline-flex items-center px-2 py-1 rounded font-caption text-caption ${published ? 'bg-secondary-container/50 text-on-secondary-container' : 'bg-surface-container-high text-on-surface-variant'}">${published ? 'Publicado' : 'Rascunho'}</span></td><td data-field="date" data-label="Data" class="py-md px-gutter hidden sm:table-cell text-on-surface-variant text-sm">${formatArticleDate(published ? article.publishedAt : article.updatedAt)}</td><td data-field="actions" data-label="Ações" class="py-md px-gutter text-right"><a class="text-outline hover:text-primary transition-colors p-1 inline-block" title="Editar artigo" aria-label="Editar artigo" href="${route(`admin/editor/?id=${encodeURIComponent(article.id)}`)}"><span class="material-symbols-outlined text-[20px]">edit</span></a><button data-delete-article="${escapeHtml(article.id)}" class="text-outline hover:text-error transition-colors p-1" type="button" title="Excluir artigo" aria-label="Excluir artigo"><span class="material-symbols-outlined text-[20px]">delete</span></button></td></tr>`;
   }
 
   private renderPagination(totalPages: number): void {
@@ -411,9 +462,28 @@ export class PanelPage {
     requiredById<HTMLInputElement>('setting-site-name').value = settings.siteName;
     requiredById<HTMLInputElement>('setting-email').value = settings.email;
     requiredById<HTMLInputElement>('setting-oab').value = settings.oab;
-    requiredById<HTMLTextAreaElement>('setting-address').value = settings.address;
+    const address = addressFields(settings.address);
+    requiredById<HTMLInputElement>('setting-address-street').value = address.street;
+    requiredById<HTMLInputElement>('setting-address-number').value = address.number;
+    requiredById<HTMLInputElement>('setting-address-complement').value = address.complement;
+    requiredById<HTMLInputElement>('setting-address-district').value = address.district;
+    requiredById<HTMLInputElement>('setting-address-city').value = address.city;
+    requiredById<HTMLInputElement>('setting-address-state').value = address.state;
+    requiredById<HTMLInputElement>('setting-address-postal-code').value = address.postalCode;
     requiredById<HTMLInputElement>('setting-phone').value = settings.phone;
     requiredById<HTMLInputElement>('setting-office-hours').value = settings.officeHours;
+  }
+
+  private readAddressFields(): AddressFields {
+    return {
+      street: requiredById<HTMLInputElement>('setting-address-street').value.trim(),
+      number: requiredById<HTMLInputElement>('setting-address-number').value.trim(),
+      complement: requiredById<HTMLInputElement>('setting-address-complement').value.trim(),
+      district: requiredById<HTMLInputElement>('setting-address-district').value.trim(),
+      city: requiredById<HTMLInputElement>('setting-address-city').value.trim(),
+      state: requiredById<HTMLInputElement>('setting-address-state').value.trim().toUpperCase(),
+      postalCode: requiredById<HTMLInputElement>('setting-address-postal-code').value.trim()
+    };
   }
 
   private renderContacts(): void {
