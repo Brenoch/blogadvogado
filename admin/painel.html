@@ -69,7 +69,7 @@
 <div class="hidden md:block">
 <h1 id="panel-title" class="font-h2 font-h2 text-h2 text-primary">Artigos</h1>
 </div>
-<a href="/clientes/blogadvogado/admin/editor/" class="bg-primary text-on-primary h-[48px] px-gutter flex items-center gap-sm clip-angular hover:opacity-90 transition-opacity">
+<a data-admin-new-article href="/clientes/blogadvogado/admin/editor/" class="bg-primary text-on-primary h-[48px] px-gutter flex items-center gap-sm clip-angular hover:opacity-90 transition-opacity">
 <span class="font-label font-label text-label uppercase tracking-widest">Novo artigo</span>
 <span class="material-symbols-outlined">arrow_forward_ios</span>
 </a>
@@ -111,12 +111,10 @@
 <section id="settings-panel" class="max-w-container-max mx-auto space-y-xl" hidden>
 <div><p class="font-label text-label uppercase tracking-widest text-on-surface-variant mb-xs">Dados do escritório</p><h2 class="font-h2 text-h2 text-primary">Configurações</h2></div>
 <form id="settings-form" class="bg-surface-container-lowest border border-outline-variant/20 p-gutter space-y-md" novalidate>
-<div><label class="block font-label text-label text-primary mb-xs" for="setting-site-name">Nome do escritório</label><input id="setting-site-name" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="80"></div>
-<div><label class="block font-label text-label text-primary mb-xs" for="setting-email">E-mail administrativo</label><input id="setting-email" type="email" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="120"></div>
-<div><label class="block font-label text-label text-primary mb-xs" for="setting-oab">Registro OAB</label><input id="setting-oab" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="60"></div>
-<div><label class="block font-label text-label text-primary mb-xs" for="setting-address">Endereço completo</label><textarea id="setting-address" class="w-full min-h-28 border border-outline-variant/50 bg-transparent px-sm py-xs outline-none focus:border-primary" maxlength="300" placeholder="Uma linha por informação"></textarea></div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-md"><div><label class="block font-label text-label text-primary mb-xs" for="setting-phone">Telefone / WhatsApp</label><input id="setting-phone" type="tel" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="40"></div><div><label class="block font-label text-label text-primary mb-xs" for="setting-office-hours">Horário de atendimento</label><input id="setting-office-hours" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="100"></div></div>
-<div class="flex items-center gap-sm"><button type="submit" class="h-12 px-gutter bg-primary text-on-primary font-label">Salvar configurações</button><p id="settings-feedback" class="font-caption" aria-live="polite"></p></div>
+<fieldset class="admin-settings-group"><legend>Dados do escritório</legend><div class="admin-settings-grid"><div class="admin-grid-span-2"><label class="block font-label text-label text-primary mb-xs" for="setting-site-name">Nome do escritório</label><input id="setting-site-name" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="80"></div><div><label class="block font-label text-label text-primary mb-xs" for="setting-email">E-mail administrativo</label><input id="setting-email" type="email" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="120"></div><div><label class="block font-label text-label text-primary mb-xs" for="setting-oab">Registro OAB</label><input id="setting-oab" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="60"></div></div></fieldset>
+<fieldset class="admin-settings-group"><legend>Endereço exibido no site</legend><p class="admin-settings-help">Esses dados aparecem no rodapé, na página de contato e no mapa.</p><div class="admin-address-grid"><div><label class="block font-label text-label text-primary mb-xs" for="setting-address-street">Rua ou avenida</label><input id="setting-address-street" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="120" autocomplete="address-line1"></div><div><label class="block font-label text-label text-primary mb-xs" for="setting-address-number">Número</label><input id="setting-address-number" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="20" autocomplete="address-line2"></div><div class="admin-grid-span-2"><label class="block font-label text-label text-primary mb-xs" for="setting-address-complement">Complemento</label><input id="setting-address-complement" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="120"></div><div><label class="block font-label text-label text-primary mb-xs" for="setting-address-district">Bairro</label><input id="setting-address-district" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="80" autocomplete="address-level3"></div><div><label class="block font-label text-label text-primary mb-xs" for="setting-address-city">Cidade</label><input id="setting-address-city" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="80" autocomplete="address-level2"></div><div><label class="block font-label text-label text-primary mb-xs" for="setting-address-state">UF</label><input id="setting-address-state" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm uppercase outline-none focus:border-primary" maxlength="2" autocomplete="address-level1" placeholder="SP"></div><div><label class="block font-label text-label text-primary mb-xs" for="setting-address-postal-code">CEP</label><input id="setting-address-postal-code" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="10" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000"></div></div></fieldset>
+<fieldset class="admin-settings-group"><legend>Atendimento</legend><div class="admin-settings-grid"><div><label class="block font-label text-label text-primary mb-xs" for="setting-phone">Telefone / WhatsApp</label><input id="setting-phone" type="tel" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="40" autocomplete="tel"></div><div><label class="block font-label text-label text-primary mb-xs" for="setting-office-hours">Horário de atendimento</label><input id="setting-office-hours" class="w-full h-12 border border-outline-variant/50 bg-transparent px-sm outline-none focus:border-primary" maxlength="100"></div></div></fieldset>
+<div class="admin-settings-actions"><button type="submit" class="h-12 px-gutter bg-primary text-on-primary font-label">Salvar configurações</button><p id="settings-feedback" class="font-caption" aria-live="polite"></p></div>
 </form>
 </section>
 <section id="contacts-panel" class="max-w-container-max mx-auto space-y-xl" hidden>
@@ -155,13 +153,13 @@
 <!-- List Section -->
 <section class="space-y-md">
 <!-- Controls -->
-<div class="flex flex-col md:flex-row justify-between gap-sm">
+<div data-article-controls class="flex flex-col md:flex-row justify-between gap-sm">
 <div class="relative flex-1 max-w-md">
 <label class="sr-only" for="search">Buscar artigos</label>
 <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
 <input class="w-full h-12 pl-[48px] pr-sm bg-surface-container-lowest border border-outline-variant/50 focus:border-tertiary-container focus:ring-1 focus:ring-tertiary-container transition-colors font-body font-body text-body text-on-surface outline-none" id="search" placeholder="Buscar por título..." type="search" autocomplete="off">
 </div>
-<div class="flex gap-sm">
+<div data-article-filter-controls class="flex gap-sm">
 <div class="relative">
 <select id="status-filter" class="h-12 pl-sm pr-10 bg-surface-container-lowest border border-outline-variant/50 focus:border-tertiary-container focus:ring-1 focus:ring-tertiary-container appearance-none font-body font-body text-body text-on-surface outline-none cursor-pointer">
 <option value="">Status: Todos</option>
@@ -176,7 +174,7 @@
 </div>
 </div>
 <!-- Table -->
-<div class="bg-surface-container-lowest border border-outline-variant/20 overflow-x-auto">
+<div class="admin-articles-table bg-surface-container-lowest border border-outline-variant/20 overflow-x-auto">
 <table class="w-full text-left border-collapse">
 <thead>
 <tr class="border-b border-outline-variant/20 bg-surface text-on-surface-variant font-label font-label text-label">
