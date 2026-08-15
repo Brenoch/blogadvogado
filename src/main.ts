@@ -2,6 +2,7 @@ import './styles/fonts.css';
 import './styles/tailwind.css';
 import './styles/mobile-nav.css';
 import './styles/common.css';
+import './styles/legal-pages.css';
 import { CookieConsent } from './presentation/cookie-consent';
 import { MobileNavigation } from './presentation/mobile-navigation';
 import { onReady } from './shared/dom';
