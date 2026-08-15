@@ -6,3 +6,6 @@ dist/
 *.log
 artifacts/
 *.zip
+public/.htaccess
+public/robots.txt
+public/sitemap.xml

@@ -1,4 +1,4 @@
-import type { PostgrestError } from '@supabase/supabase-js';
+import type { PostgrestError, SupabaseClient } from '@supabase/supabase-js';
 import type { ContentGateway } from '../../application/ports/content-gateway';
 import { DEFAULT_SETTINGS } from '../../domain/defaults';
 import type {
@@ -12,7 +12,6 @@ import type {
   SiteSettings
 } from '../../domain/models';
 import { isDataImage, dataUrlToBlob } from '../images/data-image';
-import { supabase } from './client';
 import {
   articleFromRow,
   articleToRow,
@@ -39,6 +38,7 @@ function throwError(error: PostgrestError | Error | null): void {
 
 export class SupabaseContentGateway implements ContentGateway {
   public async loadPublic(): Promise<PublicContent> {
+    const supabase = await this.client();
     const [articleResult, categoryResult, settingsResult, authorResult] = await Promise.all([
       supabase.from('articles').select('*').eq('status', 'published').order('published_at', { ascending: false }),
       supabase.from('categories').select('*').order('created_at', { ascending: true }),
@@ -66,6 +66,7 @@ export class SupabaseContentGateway implements ContentGateway {
 
   public async loadAdmin(): Promise<AdminContent> {
     await this.requireAdmin();
+    const supabase = await this.client();
     const [articleResult, categoryResult, settingsResult, contactResult, authorResult] = await Promise.all([
       supabase.from('articles').select('*').order('updated_at', { ascending: false }),
       supabase.from('categories').select('*').order('created_at', { ascending: true }),
@@ -92,6 +93,7 @@ export class SupabaseContentGateway implements ContentGateway {
   }
 
   public async isAdmin(): Promise<boolean> {
+    const supabase = await this.client();
     const userResult = await supabase.auth.getUser();
     if (userResult.error || !userResult.data.user) return false;
     const profileResult = await supabase
@@ -107,6 +109,7 @@ export class SupabaseContentGateway implements ContentGateway {
     const coverImage = await this.uploadImage(article.coverImage, `articles/${article.id}`, 'cover', 1024 * 1024);
     const coverThumbnail = await this.uploadImage(article.coverThumbnail, `articles/${article.id}`, 'thumbnail', 1024 * 1024);
     const payload = articleToRow({ ...article, coverImage, coverThumbnail });
+    const supabase = await this.client();
     const result = await supabase.from('articles').upsert(payload).select().single();
     throwError(result.error);
     const saved = row(result.data);
@@ -116,6 +119,7 @@ export class SupabaseContentGateway implements ContentGateway {
 
   public async deleteArticle(id: string): Promise<void> {
     await this.requireAdmin();
+    const supabase = await this.client();
     const result = await supabase.from('articles').delete().eq('id', id);
     throwError(result.error);
     await this.removeFolderFiles(`articles/${id}`);
@@ -124,6 +128,7 @@ export class SupabaseContentGateway implements ContentGateway {
   public async saveAuthor(author: Author): Promise<Author> {
     await this.requireAdmin();
     const avatarUrl = await this.uploadImage(author.avatarUrl, `authors/${author.id}`, 'avatar', 512 * 1024);
+    const supabase = await this.client();
     const result = await supabase.from('authors').upsert(authorToRow({ ...author, avatarUrl })).select().single();
     throwError(result.error);
     const saved = row(result.data);
@@ -133,6 +138,7 @@ export class SupabaseContentGateway implements ContentGateway {
 
   public async deleteAuthor(id: string): Promise<void> {
     await this.requireAdmin();
+    const supabase = await this.client();
     const result = await supabase.from('authors').delete().eq('id', id);
     throwError(result.error);
     await this.removeFolderFiles(`authors/${id}`);
@@ -140,6 +146,7 @@ export class SupabaseContentGateway implements ContentGateway {
 
   public async saveCategory(category: Category): Promise<void> {
     await this.requireAdmin();
+    const supabase = await this.client();
     const result = await supabase.from('categories').insert({
       slug: category.slug,
       name: category.name,
@@ -150,12 +157,14 @@ export class SupabaseContentGateway implements ContentGateway {
 
   public async deleteCategory(slug: string): Promise<void> {
     await this.requireAdmin();
+    const supabase = await this.client();
     const result = await supabase.from('categories').delete().eq('slug', slug).eq('locked', false);
     throwError(result.error);
   }
 
   public async saveSettings(settings: SiteSettings): Promise<SiteSettings> {
     await this.requireAdmin();
+    const supabase = await this.client();
     const result = await supabase.from('site_settings').upsert(settingsToRow(settings)).select().single();
     throwError(result.error);
     const saved = row(result.data);
@@ -164,6 +173,7 @@ export class SupabaseContentGateway implements ContentGateway {
   }
 
   public async submitContact(contact: ContactSubmission): Promise<string> {
+    const supabase = await this.client();
     const result = await supabase.rpc('submit_contact', {
       p_name: contact.name.trim(),
       p_email: contact.email.trim(),
@@ -178,17 +188,20 @@ export class SupabaseContentGateway implements ContentGateway {
 
   public async markContactRead(id: string): Promise<void> {
     await this.requireAdmin();
+    const supabase = await this.client();
     const result = await supabase.from('contacts').update({ status: 'read' }).eq('id', id);
     throwError(result.error);
   }
 
   public async deleteContact(id: string): Promise<void> {
     await this.requireAdmin();
+    const supabase = await this.client();
     const result = await supabase.from('contacts').delete().eq('id', id);
     throwError(result.error);
   }
 
   public async signIn(email: string, password: string): Promise<void> {
+    const supabase = await this.client();
     const result = await supabase.auth.signInWithPassword({ email: email.trim(), password });
     if (result.error) throw new Error('E-mail ou senha inválidos.');
     if (!await this.isAdmin()) {
@@ -198,6 +211,7 @@ export class SupabaseContentGateway implements ContentGateway {
   }
 
   public async signOut(): Promise<void> {
+    const supabase = await this.client();
     const result = await supabase.auth.signOut({ scope: 'local' });
     if (result.error) throw result.error;
   }
@@ -212,6 +226,7 @@ export class SupabaseContentGateway implements ContentGateway {
     if (blob.size > maxBytes) throw new Error('A imagem excede o limite permitido.');
     const fileName = `${prefix}-${Date.now()}.webp`;
     const path = `${folder}/${fileName}`;
+    const supabase = await this.client();
     const upload = await supabase.storage.from('article-images').upload(path, blob, {
       contentType: 'image/webp',
       upsert: false,
@@ -223,6 +238,7 @@ export class SupabaseContentGateway implements ContentGateway {
   }
 
   private async removeOldVariants(folder: string, prefix: string, keep: string): Promise<void> {
+    const supabase = await this.client();
     const list = await supabase.storage.from('article-images').list(folder, { limit: 100 });
     if (list.error) return;
     const paths = (list.data ?? [])
@@ -232,8 +248,13 @@ export class SupabaseContentGateway implements ContentGateway {
   }
 
   private async removeFolderFiles(folder: string): Promise<void> {
+    const supabase = await this.client();
     const list = await supabase.storage.from('article-images').list(folder, { limit: 100 });
     if (list.error || !list.data?.length) return;
     await supabase.storage.from('article-images').remove(list.data.map(({ name }) => `${folder}/${name}`));
+  }
+
+  private async client(): Promise<SupabaseClient> {
+    return (await import('./client')).supabase;
   }
 }

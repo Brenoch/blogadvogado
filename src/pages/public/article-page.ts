@@ -5,10 +5,10 @@ import {
   escapeHtml,
   formatArticleDate,
   safeImageUrl,
-  sanitizeArticleHtml,
   slugify,
   youtubeEmbedUrl
 } from '../../domain/text';
+import { sanitizeArticleHtml } from '../../infrastructure/sanitization/article-html';
 import { requiredById } from '../../shared/dom';
 import { SeoPresenter } from '../../presentation/seo-presenter';
 

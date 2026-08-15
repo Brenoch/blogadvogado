@@ -2,11 +2,8 @@ import './styles/fonts.css';
 import './styles/tailwind.css';
 import './styles/mobile-nav.css';
 import './styles/common.css';
-import { contentService } from './application/content-service';
 import { CookieConsent } from './presentation/cookie-consent';
 import { MobileNavigation } from './presentation/mobile-navigation';
-import { SettingsPresenter } from './presentation/settings-presenter';
-import { SeoPresenter } from './presentation/seo-presenter';
 import { onReady } from './shared/dom';
 
 const page = resolvePage();
@@ -18,11 +15,17 @@ onReady(async () => {
     return;
   }
 
-  new SettingsPresenter().mount();
-  new SeoPresenter().apply();
   new MobileNavigation().mount();
   new CookieConsent().mount();
   mountHeaderEffect();
+
+  const [{ contentService }, { SettingsPresenter }, { SeoPresenter }] = await Promise.all([
+    import('./application/content-service'),
+    import('./presentation/settings-presenter'),
+    import('./presentation/seo-presenter')
+  ]);
+  new SettingsPresenter().mount();
+  new SeoPresenter().apply();
 
   if (['area-detail', 'direito-civil', 'direito-previdenciario', 'direito-trabalhista'].includes(page)) {
     await import('./styles/area-detalhe.css');
@@ -45,12 +48,35 @@ onReady(async () => {
     mountAreaDetailPage();
   }
 
-  try {
-    await contentService.refreshPublic();
-  } catch (error) {
-    console.error('Não foi possível atualizar o conteúdo.', error);
-  }
+  const refresh = async (): Promise<void> => {
+    try {
+      await contentService.refreshPublic();
+    } catch (error) {
+      console.error('Não foi possível atualizar o conteúdo.', error);
+    }
+  };
+
+  if (['blog', 'contact', 'area-detail'].includes(page)) await refresh();
+  else scheduleContentRefresh(refresh);
 });
+
+function scheduleContentRefresh(refresh: () => Promise<void>): void {
+  let started = false;
+  let timer = 0;
+  const start = (): void => {
+    if (started) return;
+    started = true;
+    clearTimeout(timer);
+    removeEventListener('scroll', start);
+    removeEventListener('pointerdown', start);
+    removeEventListener('keydown', start);
+    void refresh();
+  };
+  addEventListener('scroll', start, { passive: true, once: true });
+  addEventListener('pointerdown', start, { passive: true, once: true });
+  addEventListener('keydown', start, { once: true });
+  timer = window.setTimeout(start, 8000);
+}
 
 async function mountAdminPage(): Promise<void> {
   await import('./styles/admin-responsive.css');

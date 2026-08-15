@@ -24,12 +24,12 @@ export const DEFAULT_AUTHOR: Author = {
   slug: 'andres-oliveira',
   name: 'Dr. Andres Oliveira',
   role: 'Sócio Fundador',
-  avatarUrl: '/clientes/blogadvogado/images/da0602dd94c3e7a7.jpg',
+  avatarUrl: '/clientes/blogadvogado/images/da0602dd94c3e7a7.webp',
   isDefault: true
 };
 
 export const DEFAULT_SETTINGS: SiteSettings = {
-  siteName: 'Andres Oliveira Advocacia',
+  siteName: 'Andre Oliveira Advocacia',
   email: 'contato@andresoliveira.adv.br',
   oab: 'OAB/SP 000.000',
   address: 'Av. Paulista, 1000\nConjunto 152\nBela Vista, São Paulo - SP\nCEP 01310-100',
