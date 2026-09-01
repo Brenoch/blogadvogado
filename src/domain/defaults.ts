@@ -11,12 +11,11 @@ export const STORAGE_KEYS = {
 
 export const DEFAULT_CATEGORIES: readonly Category[] = [
   { slug: 'direito-previdenciario', name: 'Direito Previdenciário', locked: true },
-  { slug: 'direito-civil', name: 'Direito Civil', locked: true },
-  { slug: 'direito-penal', name: 'Direito Penal', locked: true },
-  { slug: 'direito-bancario', name: 'Direito Bancário', locked: true },
-  { slug: 'direito-do-consumidor', name: 'Direito do Consumidor', locked: true },
   { slug: 'direito-trabalhista', name: 'Direito Trabalhista', locked: true },
-  { slug: 'direito-administrativo', name: 'Direito Administrativo', locked: true }
+  { slug: 'direito-do-consumidor', name: 'Direito do Consumidor', locked: true },
+  { slug: 'direito-civil', name: 'Direito Civil', locked: true },
+  { slug: 'direito-militar', name: 'Direito Militar', locked: true },
+  { slug: 'direito-penal', name: 'Direito Penal', locked: true }
 ] as const;
 
 export const DEFAULT_AUTHOR: Author = {

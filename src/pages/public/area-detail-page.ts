@@ -23,15 +23,6 @@ const AREAS: Record<string, AreaContent> = {
     services: ['Acompanhamento em inquéritos', 'Defesa em processos criminais', 'Análise de medidas cautelares', 'Orientação sobre audiências'],
     subject: 'penal'
   },
-  bancario: {
-    title: 'Direito Bancário',
-    lead: 'Análise jurídica de contratos bancários, operações de crédito e relações financeiras.',
-    intro: 'Relações bancárias envolvem contratos, encargos e obrigações que precisam ser lidos com precisão antes de qualquer medida.',
-    method: 'O atendimento considera o instrumento contratual, os comprovantes e a evolução da relação financeira para identificar os caminhos possíveis.',
-    documents: 'Separe contratos, faturas, extratos, notificações e comprovantes de pagamento.',
-    services: ['Revisão de contratos bancários', 'Análise de operações de crédito', 'Cobranças e renegociação', 'Orientação sobre garantias'],
-    subject: 'bancario'
-  },
   consumidor: {
     title: 'Direito do Consumidor',
     lead: 'Orientação em relações de consumo, contratos, cobranças e defesa de direitos.',
@@ -41,14 +32,14 @@ const AREAS: Record<string, AreaContent> = {
     services: ['Contratos de consumo', 'Cobranças indevidas', 'Falhas na prestação de serviços', 'Negociações e defesa de direitos'],
     subject: 'consumidor'
   },
-  administrativo: {
-    title: 'Direito Administrativo',
-    lead: 'Orientação em processos administrativos, relações com órgãos públicos e licitações.',
-    intro: 'Demandas administrativas dependem de prazos, documentos e regras específicas do órgão envolvido.',
-    method: 'A análise verifica os atos recebidos, os prazos aplicáveis e a documentação necessária para uma resposta tecnicamente adequada.',
-    documents: 'Reúna notificações, processos, editais, contratos e comunicações oficiais.',
-    services: ['Processos administrativos', 'Licitações e contratos públicos', 'Defesas e recursos administrativos', 'Orientação perante órgãos públicos'],
-    subject: 'administrativo'
+  militar: {
+    title: 'Direito Militar',
+    lead: 'Atuação em processos administrativos disciplinares, direitos previdenciários militares e questões estatutárias.',
+    intro: 'Questões militares envolvem regras próprias, prazos específicos e uma hierarquia funcional que exige leitura técnica cuidadosa do regulamento aplicável.',
+    method: 'A análise considera o regulamento disciplinar, os atos administrativos e os documentos do processo para identificar a estratégia mais adequada.',
+    documents: 'Reúna boletins, portarias, notificações, fichas funcionais e demais documentos relacionados ao processo ou ao pedido.',
+    services: ['Processos administrativos disciplinares', 'Direitos previdenciários militares', 'Recursos e defesas estatutárias', 'Orientação a militares e ex-militares'],
+    subject: 'militar'
   }
 };
 
