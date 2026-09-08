@@ -76,7 +76,6 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('@supabase')) return 'supabase';
-          if (id.includes('@fontsource')) return 'fonts';
           return undefined;
         }
       }
