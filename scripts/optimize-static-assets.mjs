@@ -3,6 +3,9 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 
 const root = resolve(import.meta.dirname, '..');
+// As fontes ficam fora de `public` para que o Vite não as publique: só os
+// derivados em WebP são servidos.
+const sourceDirectory = resolve(root, 'assets-source', 'images');
 const imageDirectory = resolve(root, 'public', 'images');
 const fontDirectory = resolve(root, 'public', 'fonts');
 
@@ -15,13 +18,14 @@ const images = [
   ['da0602dd94c3e7a7.jpg', 'da0602dd94c3e7a7.webp', 82]
 ];
 
+await mkdir(imageDirectory, { recursive: true });
 await Promise.all(images.map(async ([source, target, quality, width]) => {
-  let pipeline = sharp(resolve(imageDirectory, source)).rotate();
+  let pipeline = sharp(resolve(sourceDirectory, source)).rotate();
   if (width) pipeline = pipeline.resize({ width, withoutEnlargement: true });
   await pipeline.webp({ quality, effort: 6 }).toFile(resolve(imageDirectory, target));
 }));
 
-await sharp(resolve(imageDirectory, '1fb1e1048c240597.png'))
+await sharp(resolve(sourceDirectory, '1fb1e1048c240597.png'))
   .resize(64, 64, { fit: 'contain' })
   .png({ compressionLevel: 9, palette: true })
   .toFile(resolve(root, 'public', 'favicon.png'));
