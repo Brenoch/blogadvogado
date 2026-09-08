@@ -64,7 +64,7 @@ export class ArticlePage {
       image: safeImageUrl(article.coverImage) || undefined,
       datePublished: article.publishedAt,
       dateModified: article.updatedAt,
-      author: { '@type': 'Person', name: author?.name || 'Andres Oliveira' },
+      author: { '@type': 'Person', name: author?.name || 'Andre Oliveira' },
       publisher: { '@type': 'LegalService', name: settings.siteName },
       mainEntityOfPage: canonical
     });

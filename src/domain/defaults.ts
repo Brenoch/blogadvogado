@@ -21,7 +21,7 @@ export const DEFAULT_CATEGORIES: readonly Category[] = [
 export const DEFAULT_AUTHOR: Author = {
   id: '',
   slug: 'andres-oliveira',
-  name: 'Dr. Andres Oliveira',
+  name: 'Dr. Andre Oliveira',
   role: 'Sócio Fundador',
   avatarUrl: '/clientes/blogadvogado/images/da0602dd94c3e7a7.webp',
   isDefault: true
