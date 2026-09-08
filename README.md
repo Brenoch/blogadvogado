@@ -34,7 +34,7 @@ Os arquivos HTML na raiz são entradas multipágina do Vite. A hospedagem conver
 ## SEO e desempenho
 
 - Metadados, canonical, Open Graph e dados estruturados.
-- `robots.txt`, `sitemap.xml` e `llms.txt` gerados no build.
+- `robots.txt` e `sitemap.xml` gerados no build; `llms.txt` mantido em `public/`.
 - Imagens estáticas convertidas para WebP.
 - Fontes locais com preload e `font-display: swap`.
 - Integração Supabase carregada sem bloquear a primeira renderização.

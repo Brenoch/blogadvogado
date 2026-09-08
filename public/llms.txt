@@ -6,8 +6,10 @@
 
 - [Direito Previdenciário](https://brenochaves.dev/clientes/blogadvogado/direito-previdenciario/): benefícios, aposentadorias e demandas perante o INSS.
 - [Direito Trabalhista](https://brenochaves.dev/clientes/blogadvogado/direito-trabalhista/): orientação preventiva, documentos e conflitos trabalhistas.
+- [Direito do Consumidor](https://brenochaves.dev/clientes/blogadvogado/areas-de-atuacao/consumidor/): relações de consumo, contratos e defesa de direitos.
 - [Direito Civil](https://brenochaves.dev/clientes/blogadvogado/direito-civil/): contratos, obrigações e responsabilidade civil.
-- [Outras áreas](https://brenochaves.dev/clientes/blogadvogado/areas-de-atuacao/): Direito Penal, Bancário, do Consumidor e Administrativo.
+- [Direito Militar](https://brenochaves.dev/clientes/blogadvogado/areas-de-atuacao/militar/): processos disciplinares, previdência militar e direitos de militares.
+- [Direito Penal](https://brenochaves.dev/clientes/blogadvogado/areas-de-atuacao/penal/): defesa técnica em procedimentos e processos criminais.
 
 ## Conteúdo e contato
 
@@ -22,4 +24,4 @@
 - Nome: Andre Oliveira Advocacia
 - Idioma: português do Brasil
 - Público: pessoas que procuram informações jurídicas e atendimento profissional
-- Temas principais: advogado previdenciário, Direito Previdenciário, Direito Trabalhista, Direito Civil e Direito do Consumidor
+- Temas principais: advogado previdenciário, Direito Previdenciário, Direito Trabalhista, Direito do Consumidor, Direito Civil, Direito Militar e Direito Penal

@@ -14,10 +14,9 @@ await Promise.all([
 const staticPages = [
   '/',
   '/areas-de-atuacao/',
-  '/areas-de-atuacao/penal/',
-  '/areas-de-atuacao/bancario/',
   '/areas-de-atuacao/consumidor/',
-  '/areas-de-atuacao/administrativo/',
+  '/areas-de-atuacao/militar/',
+  '/areas-de-atuacao/penal/',
   '/direito-previdenciario/',
   '/direito-trabalhista/',
   '/direito-civil/',
