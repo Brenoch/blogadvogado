@@ -22,6 +22,7 @@ export class SettingsPresenter {
     this.updateAttributes(settings);
     this.updateStructuredData(settings);
     this.updateLocation(settings);
+    this.updateContactDetails(settings);
     this.updateWhatsApp(settings);
     this.renderFooter(settings);
     this.previous = settings;
@@ -66,6 +67,29 @@ export class SettingsPresenter {
     document.querySelectorAll<HTMLAnchorElement>('[data-google-maps-link]').forEach((link) => {
       link.href = `https://www.google.com/maps/search/?api=1&query=${query}`;
     });
+  }
+
+  // A página de contato repete telefone e horário fora do rodapé; sem isto os
+  // valores do painel chegariam ao rodapé e ao link do WhatsApp, mas não aos
+  // cartões, que continuariam mostrando os dados de exemplo do HTML.
+  private updateContactDetails(settings: SiteSettings): void {
+    const phone = settings.phone.trim();
+    if (phone) {
+      document.querySelectorAll<HTMLAnchorElement>('[data-contact-phone]').forEach((element) => {
+        element.textContent = phone;
+        element.href = `tel:${phone.replace(/[^+\d]/g, '')}`;
+      });
+      document.querySelectorAll<HTMLElement>('[data-contact-whatsapp]').forEach((element) => {
+        element.textContent = phone;
+      });
+    }
+
+    const hours = settings.officeHours.trim();
+    if (hours) {
+      document.querySelectorAll<HTMLElement>('[data-contact-hours]').forEach((element) => {
+        element.textContent = hours;
+      });
+    }
   }
 
   private updateWhatsApp(settings: SiteSettings): void {
