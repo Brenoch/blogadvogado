@@ -60,12 +60,24 @@ async function loadArticles(env) {
   return response.json();
 }
 
+// Prefere variáveis já presentes no processo (é assim que Cloudflare Pages,
+// Vercel e qualquer CI moderno injetam segredos de build) e usa o arquivo
+// .env.production só como conveniência local, quando ele existir. Nenhuma
+// das duas fontes é obrigatória: sem credenciais, o sitemap sai só com as
+// páginas estáticas, exatamente como o catch abaixo já esperava.
 async function readEnvironment(path) {
-  const content = await readFile(path, 'utf8');
-  return Object.fromEntries(content.split(/\r?\n/).filter(Boolean).map((line) => {
+  const fromProcess = {
+    VITE_SUPABASE_URL: process.env.VITE_SUPABASE_URL,
+    VITE_SUPABASE_PUBLISHABLE_KEY: process.env.VITE_SUPABASE_PUBLISHABLE_KEY
+  };
+  if (fromProcess.VITE_SUPABASE_URL && fromProcess.VITE_SUPABASE_PUBLISHABLE_KEY) return fromProcess;
+
+  const content = await readFile(path, 'utf8').catch(() => '');
+  const fromFile = Object.fromEntries(content.split(/\r?\n/).filter(Boolean).map((line) => {
     const index = line.indexOf('=');
     return [line.slice(0, index), line.slice(index + 1)];
   }));
+  return { ...fromFile, ...fromProcess };
 }
 
 function escapeXml(value) {
